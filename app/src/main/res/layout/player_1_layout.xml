@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/one"
-        android:onClick="1"
+        android:onClick="Modify_string_to_one"
         android:id="@+id/button3"
         android:layout_marginLeft="50dp"
         android:layout_marginStart="50dp"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/zero"
-        android:onClick="0"
+        android:onClick="Modify_string_to_zero"
         android:id="@+id/button4"
         android:layout_alignTop="@+id/button3"
         android:layout_alignParentRight="true"
@@ -34,9 +34,27 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/output"
+        android:layout_marginBottom="54dp"
+        android:text="@string/action_settings"
         android:layout_above="@+id/button3"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="5"
+        android:layout_above="@+id/output"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp"
-        android:text="@string/action_settings" />
+        android:layout_marginBottom="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter the following number in binary:"
+        android:id="@+id/textView"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
