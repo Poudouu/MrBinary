@@ -14,6 +14,9 @@ import android.view.View;
  */
 public class Player_1 extends ActionBarActivity {
 
+    int integer_to_enter=1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,10 +24,16 @@ public class Player_1 extends ActionBarActivity {
         Intent intent = getIntent();
         TextView output = (TextView)findViewById(R.id.output);
         output.setText("");
+
+        String integer_to_display = ""+integer_to_enter;
+        TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+        int_to_disp.setText(integer_to_display);
+
     }
 
     public void Modify_string_to_one(View vieuw) {
-        String test_to_compare ="101";
+
+        String test_to_compare= Integer.toBinaryString(integer_to_enter);
 
         TextView output = (TextView)findViewById(R.id.output);
         String temp_1 = (String) output.getText().toString();
@@ -40,9 +49,21 @@ public class Player_1 extends ActionBarActivity {
         {
             if ((test_to_compare).equals(temp_2)){
                 output.setText("You win!!!!");
+
+                integer_to_enter ++;
+
+                String integer_to_display = ""+integer_to_enter;
+                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                int_to_disp.setText(integer_to_display);
             }
             else{
                 output.setText("You fail!!!!");
+
+                integer_to_enter=1;
+
+                String integer_to_display = ""+integer_to_enter;
+                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                int_to_disp.setText(integer_to_display);
             }
         }else {
             output.setText(temp_2);
@@ -50,7 +71,8 @@ public class Player_1 extends ActionBarActivity {
     }
 
     public void Modify_string_to_zero(View vieuw) {
-        String test_to_compare ="101";
+
+        String test_to_compare= Integer.toBinaryString(integer_to_enter);
 
         TextView output = (TextView)findViewById(R.id.output);
         String temp_1 = (String) output.getText().toString();
@@ -66,9 +88,21 @@ public class Player_1 extends ActionBarActivity {
         {
             if ((test_to_compare).equals(temp_2)){
                 output.setText("You win!!!!");
+
+                integer_to_enter ++;
+
+                String integer_to_display = ""+integer_to_enter;
+                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                int_to_disp.setText(integer_to_display);
             }
             else{
                 output.setText("You fail!!!!");
+
+                integer_to_enter=1;
+
+                String integer_to_display = ""+integer_to_enter;
+                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                int_to_disp.setText(integer_to_display);
             }
         }else {
             output.setText(temp_2);
