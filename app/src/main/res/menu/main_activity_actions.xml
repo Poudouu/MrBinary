@@ -8,6 +8,6 @@
         MyApplication:showAsAction="ifRoom"  />
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:title="@string/entered_binary_seq"
         MyApplication:showAsAction="never" />
 </menu>
