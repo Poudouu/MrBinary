@@ -12,7 +12,6 @@
         android:text="@string/one"
         android:onClick="Modify_string_to_one"
         android:id="@+id/button3"
-        android:layout_marginBottom="57dp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />
@@ -73,8 +72,20 @@
         android:textStyle="bold"
         android:textSize="25sp"
         android:gravity="center"
+        android:layout_above="@+id/Actual_game_status"
+        android:layout_below="@+id/best_score"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/Actual_game_status" />
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/best_score"
+        android:id="@+id/best_score"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

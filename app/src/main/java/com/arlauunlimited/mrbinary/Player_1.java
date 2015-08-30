@@ -1,11 +1,25 @@
 package com.arlauunlimited.mrbinary;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.view.View;
 import android.os.CountDownTimer;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import static java.lang.Integer.parseInt;
+
 
 /**
  * Created by i7-3930 on 17/08/2015.
@@ -19,12 +33,17 @@ public class Player_1 extends ActionBarActivity {
     // Flag used to start a new counter at every good input of the player
     boolean flag_new_counter=false;
 
+    OutputStreamWriter osw = null;
+    InputStreamReader isr = null;
+    String best_to_write_string="";
+
     String play_now="Play now!";
     String you_fail_try_again="You fail! Try again!";
     String time_over="Time over!";
     String you_win="You win!";
     String playing="Playing...";
     String timeout_try_again="Timeout... try again!";
+    String best_score_file ="game_data.dat";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +68,11 @@ public class Player_1 extends ActionBarActivity {
         TextView textic = (TextView) findViewById(R.id.counter);
         textic.setText("");
 
+        try {
+            check_and_update_high_score(1);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
@@ -89,6 +113,11 @@ public class Player_1 extends ActionBarActivity {
 
                 TextView act_game_stat = (TextView)findViewById(R.id.Actual_game_status);
                 act_game_stat.setText(timeout_try_again);
+                try {
+                    check_and_update_high_score(integer_to_enter);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 integer_to_enter=1;
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
@@ -99,6 +128,132 @@ public class Player_1 extends ActionBarActivity {
 
             }
         };
+    }
+
+    public void check_and_update_high_score(int potential_high_score_from_game) throws FileNotFoundException {
+
+        int potential_high_score= potential_high_score_from_game-1;
+
+        int best_score_to_write=0;
+        int actual_best_score=0;
+        char[] inputBuffer = new char[2];
+        String best_score_read_1="";
+        String best_score_read_2="";
+
+        // Read the actual high score stored in the file game_data.dat stored in the app directory on the device.
+        try {
+
+            FileInputStream fileInputStream=openFileInput("game_data.dat");
+            isr= new InputStreamReader(fileInputStream);
+            isr.read(inputBuffer);
+
+            // See below for explanation of why the read data are put in two strings...
+            best_score_read_1 = String.valueOf(inputBuffer);
+            best_score_read_2= inputBuffer[0]+"";
+
+            // For debugging only
+            //Toast.makeText(getApplicationContext(),inputBuffer[0]+"", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),inputBuffer[1]+"", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),best_score_read_1+"", Toast.LENGTH_LONG).show();
+            isr.close();
+            fileInputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Merdier to parse the read high score in char to int... Coudn't find something else working.
+        int match_int_1=0;
+        int match_int_2=0;
+        int i=0;
+        // Parse first for two digits integer based on valueOf(inputBuffer), for a reason that I can't explain, it doesn't work if int >10, most probably because there is nothing in inputBuffer[1] in this case...
+        // Parse int was not working to convert the string to int so I recreate a function.
+        while  (match_int_1 == 0){
+            if (best_score_read_1 == null){
+                match_int_1=1;
+                actual_best_score=0;
+            }else {
+                String temp="";
+
+                if(i<10){
+                    temp=i+"";
+                }else{
+                    temp=i+"";
+                }
+
+                if ((temp).equals(best_score_read_1)) {
+                    match_int_1 = 1;
+                    actual_best_score =i;
+                    // For debugging only
+                    //Toast.makeText(getApplicationContext(),"Int 2 digits match found!", Toast.LENGTH_LONG).show();
+                } else {
+                    i++;
+                }
+                if (i==100){
+                    match_int_1=1;
+                    // For debugging only
+                    //Toast.makeText(getApplicationContext(),"Parse 2 digits int error...", Toast.LENGTH_LONG).show();
+                    int j=0;
+                    // Parse int<10 if the first while didn't work (i=100) based on the inputBuffer[0] convert to string only.
+                    while  (match_int_2 == 0){
+                        if (best_score_read_2 == null){
+                            match_int_2=1;
+                            actual_best_score=0;
+                        }else {
+                            String temp_1="";
+
+                            if(j<10){
+                                temp_1=j+"";
+                            }else{
+                                temp_1=j+"";
+                            }
+
+                            if ((temp_1).equals(best_score_read_2)) {
+                                match_int_2 = 1;
+                                actual_best_score =j;
+                                // For debugging only
+                                //Toast.makeText(getApplicationContext(),"Int 1 digit match found!", Toast.LENGTH_LONG).show();
+                            } else {
+                                j++;
+                            }
+                            if (j==10){
+                                match_int_2=1;
+                                // For debugging only
+                                //Toast.makeText(getApplicationContext(),"Parse 1 digit int error...", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        if (potential_high_score>actual_best_score){
+            best_score_to_write=potential_high_score;
+        }else{
+            best_score_to_write=actual_best_score;
+        }
+
+        best_to_write_string=best_score_to_write+"";
+
+        // Wright the high score stored in the file game_data.dat stored in the app directory on the device.
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("game_data.dat",MODE_PRIVATE);
+            osw = new OutputStreamWriter(fileOutputStream);
+            osw.write(best_to_write_string);
+            osw.flush();
+            osw.close();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TextView best_score_display = (TextView)findViewById(R.id.best_score);
+        String best_to_display="Best score:"+best_score_to_write;
+        best_score_display.setText(best_to_display);
     }
 
     public void actualize_game_status(String int_bin_to_compare, String entered_bin_seq, TextView act_game_stat ){
@@ -124,6 +279,11 @@ public class Player_1 extends ActionBarActivity {
             // If fail, actualize the status, reset the game + display
             else{
                 act_game_stat.setText(you_fail_try_again);
+                try {
+                    check_and_update_high_score(integer_to_enter);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 integer_to_enter=1;
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
