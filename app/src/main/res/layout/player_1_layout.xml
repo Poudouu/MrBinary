@@ -12,7 +12,7 @@
         android:text="@string/one"
         android:onClick="Modify_string_to_one"
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/button4"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />
 
@@ -22,27 +22,27 @@
         android:text="@string/zero"
         android:onClick="Modify_string_to_zero"
         android:id="@+id/button4"
-        android:layout_alignTop="@+id/button3"
+        android:layout_marginBottom="42dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView"
         android:layout_alignEnd="@+id/textView" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/output"
         android:text="@string/entered_binary_seq"
         android:textSize="25sp"
-        android:layout_above="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp" />
+        android:layout_below="@+id/int_to_disp"
+        android:layout_centerHorizontal="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/int_to_disp"
         android:textSize="50sp"
         android:text="@string/Int_to_enter"
-        android:layout_above="@+id/output"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -51,35 +51,32 @@
         android:text="Number to enter:"
         android:textSize="25sp"
         android:id="@+id/textView"
-        android:layout_above="@+id/int_to_disp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Actual_game_status"
         android:textSize="25sp"
         android:text="@string/game_status"
-        android:layout_marginBottom="21dp"
-        android:layout_above="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/counter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp" />
 
     <TextView
         android:id="@+id/counter"
         android:text="Counter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="35sp"
         android:gravity="center"
-        android:layout_above="@+id/Actual_game_status"
+        android:layout_marginTop="39dp"
         android:layout_below="@+id/best_score"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/best_score"
@@ -87,5 +84,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/last_score"
+        android:id="@+id/last_score"
+        android:layout_below="@+id/best_score"
+        android:layout_alignLeft="@+id/best_score"
+        android:layout_alignStart="@+id/best_score" />
 
 </RelativeLayout>

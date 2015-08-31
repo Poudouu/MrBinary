@@ -29,18 +29,19 @@ public class Player_1 extends ActionBarActivity {
     int integer_to_enter=1;
     CountDownTimer Count;
     // Counter value used to create the counter
-    long counter_value;
+    long counter_value_global;
     // Flag used to start a new counter at every good input of the player
     boolean flag_new_counter=false;
 
     OutputStreamWriter osw = null;
     InputStreamReader isr = null;
     String best_to_write_string="";
+    boolean flag_count_value_updated=false;
 
     String play_now="Play now!";
     String you_fail_try_again="You fail! Try again!";
     String time_over="Time over!";
-    String you_win="You win!";
+    String you_win="Good answer: +2s";
     String playing="Playing...";
     String timeout_try_again="Timeout... try again!";
     String best_score_file ="game_data.dat";
@@ -76,16 +77,21 @@ public class Player_1 extends ActionBarActivity {
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
-    public void create_counter(){
-
-        Count =  new CountDownTimer(counter_value, 500){
+    public void create_counter(final long counter_value){
+        //if a counter is already running when trying to build a new one, cancel it (Bug fix).
+        try{
+            Count.cancel();
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+        Count =  new CountDownTimer(counter_value, 1000){
 
             // Action to check at every tic
             public void onTick(long millisUntilFinished) {
                 TextView textic = (TextView) findViewById(R.id.counter);
                 int seconds = (int) ((millisUntilFinished / 1000));
 
-                textic.setText(seconds + "s " + (millisUntilFinished - (seconds * 1000)) + "ms");
+                textic.setText(seconds + "s ");
 
                 TextView act_game_stat = (TextView)findViewById(R.id.Actual_game_status);
                 String temp_4 = (String) act_game_stat.getText().toString();
@@ -94,16 +100,15 @@ public class Player_1 extends ActionBarActivity {
                 if ((temp_4).equals(you_fail_try_again)) {
                     Count.cancel();
                     textic.setText("");
+
                 }
                 // If the player enter a good answer, the counter is canceled, the counter value is updated and a new counter is launched
                 if (flag_new_counter) {
                     flag_new_counter=false;
-                    Count.cancel();
-                    counter_value= (millisUntilFinished + 2000);
-                    create_counter();
+                    counter_value_global= (millisUntilFinished + 2000);
+                    create_counter(counter_value_global);
                     Count.start();
                 }
-
             }
 
             // Reset of the game when the timeout goes to 0
@@ -136,7 +141,7 @@ public class Player_1 extends ActionBarActivity {
 
         int best_score_to_write=0;
         int actual_best_score=0;
-        char[] inputBuffer = new char[2];
+        char [] inputBuffer = new char [2];
         String best_score_read_1="";
         String best_score_read_2="";
 
@@ -251,9 +256,15 @@ public class Player_1 extends ActionBarActivity {
             e.printStackTrace();
         }
 
+        //Display best score
         TextView best_score_display = (TextView)findViewById(R.id.best_score);
         String best_to_display="Best score:"+best_score_to_write;
         best_score_display.setText(best_to_display);
+
+        //Display score of last game
+        TextView last_score_to_display = (TextView)findViewById(R.id.last_score);
+        String last_score_to_display_string="Last score:"+potential_high_score;
+        last_score_to_display.setText(last_score_to_display_string);
     }
 
     public void actualize_game_status(String int_bin_to_compare, String entered_bin_seq, TextView act_game_stat ){
@@ -273,7 +284,7 @@ public class Player_1 extends ActionBarActivity {
                 flag_new_counter=true;
                 integer_to_enter ++;
                 String integer_to_display = ""+integer_to_enter;
-                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
             }
             // If fail, actualize the status, reset the game + display
@@ -309,8 +320,8 @@ public class Player_1 extends ActionBarActivity {
     public void Modify_string_to_one(View vieuw) {
         //When click to enter the first number (1), start the counter with the initial value 58s +2s= 60s (because he will give automatically a good answer for the first number)
         if((integer_to_enter == 1)){
-            counter_value=28000;
-            create_counter();
+            counter_value_global=28000;
+            create_counter(counter_value_global);
             Count.start();
         }
 

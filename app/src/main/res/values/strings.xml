@@ -16,4 +16,5 @@
     <string name="one">1</string>
     <string name="zero">0</string>
     <string name="best_score">Best score</string>
+    <string name="last_score">Last score</string>
 </resources>
