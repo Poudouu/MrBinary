@@ -158,8 +158,10 @@ public class Player_1 extends ActionBarActivity {
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
-                TextView help = (TextView) findViewById(R.id.help_display);
-                help.setText(help_1);
+                if (noob_mode || normal_mode) {
+                    TextView help = (TextView) findViewById(R.id.help_display);
+                    help.setText(help_1);
+                }
 
                 TextView bin_seq_entered = (TextView)findViewById(R.id.output);
                 bin_seq_entered.setText("");
@@ -344,8 +346,10 @@ public class Player_1 extends ActionBarActivity {
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
-                TextView help = (TextView) findViewById(R.id.help_display);
-                help.setText(help_1);
+                if(noob_mode || normal_mode) {
+                    TextView help = (TextView) findViewById(R.id.help_display);
+                    help.setText(help_1);
+                }
             }
 
         }else {
