@@ -90,25 +90,9 @@ public class Player_1 extends ActionBarActivity {
             public void onTick(long millisUntilFinished) {
                 TextView textic = (TextView) findViewById(R.id.counter);
                 int seconds = (int) ((millisUntilFinished / 1000));
-
                 textic.setText(seconds + "s ");
 
-                TextView act_game_stat = (TextView)findViewById(R.id.Actual_game_status);
-                String temp_4 = (String) act_game_stat.getText().toString();
-
-                //Stop the timer if the player entered a wrong binary sequence (reset game)
-                if ((temp_4).equals(you_fail_try_again)) {
-                    Count.cancel();
-                    textic.setText("");
-
-                }
-                // If the player enter a good answer, the counter is canceled, the counter value is updated and a new counter is launched
-                if (flag_new_counter) {
-                    flag_new_counter=false;
-                    counter_value_global= (millisUntilFinished + 2000);
-                    create_counter(counter_value_global);
-                    Count.start();
-                }
+                counter_value_global= (millisUntilFinished + 2000);
             }
 
             // Reset of the game when the timeout goes to 0
@@ -282,6 +266,9 @@ public class Player_1 extends ActionBarActivity {
             if ((int_bin_to_compare).equals(entered_bin_seq)){
                 act_game_stat.setText(you_win);
                 flag_new_counter=true;
+                Count.cancel();
+                create_counter(counter_value_global);
+                Count.start();
                 integer_to_enter ++;
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
@@ -290,6 +277,10 @@ public class Player_1 extends ActionBarActivity {
             // If fail, actualize the status, reset the game + display
             else{
                 act_game_stat.setText(you_fail_try_again);
+                //Stop the timer if the player entered a wrong binary sequence (reset game)
+                Count.cancel();
+                TextView textic = (TextView) findViewById(R.id.counter);
+                textic.setText("");
                 try {
                     check_and_update_high_score(integer_to_enter);
                 } catch (FileNotFoundException e) {
