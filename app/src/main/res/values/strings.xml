@@ -1,15 +1,17 @@
 <resources>
-    <string name="app_name">Mr Binary</string>
+    <string name="app_name">Mr Binary - Home</string>
     <string name="edit_message">Choose player mode</string>
-    <string name="Player_1_selection">1 Player</string>
-    <string name="Player_2_selection">2 Players</string>
+    <string name="Noob_selection">Noob</string>
+    <string name="Normal_selection">Normal</string>
+    <string name="God_selection">God</string>
     <string name="entered_binary_seq">Entered binary sequence</string>
     <string name="game_status">Game status</string>
     <string name="Int_to_enter">Int to enter</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_search">Search</string>
-    <string name="title_activity_display_message">1 Player</string>
-    <string name="title_activity_2_display_message">2 Player</string>
+    <string name="title_activity_display_message">Mr Binary - Game</string>
+    <string name="title_activity_2_display_message">Normal</string>
+    <string name="title_activity_3_display_message">God</string>
     <string name="value_one">1</string>
     <string name="value_zero">0</string>
     <string name="temp_value"></string>

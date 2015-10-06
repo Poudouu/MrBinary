@@ -1,16 +1,14 @@
 package com.arlauunlimited.mrbinary;
 
 import android.os.Bundle;
-import android.os.Environment;
+
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.view.View;
 import android.os.CountDownTimer;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import static java.lang.Integer.parseInt;
 
 
 /**
@@ -27,39 +24,84 @@ import static java.lang.Integer.parseInt;
 public class Player_1 extends ActionBarActivity {
     //Initialization;
     int integer_to_enter=1;
+    int max_number_low_difficulty=33;
+    int initial_timer_value=30000;
     CountDownTimer Count;
     // Counter value used to create the counter
     long counter_value_global;
     // Flag used to start a new counter at every good input of the player
-    boolean flag_new_counter=false;
 
     OutputStreamWriter osw = null;
     InputStreamReader isr = null;
     String best_to_write_string="";
-    boolean flag_count_value_updated=false;
+    boolean noob_mode=false;
+    boolean normal_mode=false;
+    boolean god_mode=false;
 
     String play_now="Play now!";
     String you_fail_try_again="You fail! Try again!";
     String time_over="Time over!";
-    String you_win="Good answer: +2s";
     String playing="Playing...";
+    String you_win="Good answer: +2s";
     String timeout_try_again="Timeout... try again!";
     String best_score_file ="game_data.dat";
+    String ready_for_next_difficulty_level="Ready for next difficulty level...";
+
+    //Help strings for noob and normal modes
+    String no_help="------------------";
+    String help_1="help: 1";
+    String help_2="help: 2-1";
+    String help_3="help: 4-2-1";
+    String help_4="help: 8-4-2-1";
+    String help_5="help: 16-8-4-2-1";
+    String help_6="help: 32-16-8-4-2-1";
+    String help_7="help: 64-32-16-8-4-2-1";
+    String help_8="help: 128-64-32-16-8-4-2-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_1_layout);
 
+        //Game mode parametrization
+        TextView game_mode = (TextView) findViewById(R.id.game_mode);
+        String str = (String) getIntent().getSerializableExtra("string");
+        if ((str).equals("noob")) {
+            noob_mode = true;
+            normal_mode = false;
+            god_mode = false;
+            game_mode.setText("Mode: Noob.");
+        }
+        if ((str).equals("normal")) {
+            noob_mode = false;
+            normal_mode = true;
+            god_mode = false;
+            game_mode.setText("Mode: Normal.");
+        }
+        if ((str).equals("god")) {
+            noob_mode = false;
+            normal_mode = false;
+            god_mode = true;
+            game_mode.setText("Mode: God.");
+        }
+
         // Initialize the entered binary string to ""
-        TextView output = (TextView)findViewById(R.id.output);
+        TextView output = (TextView) findViewById(R.id.output);
         output.setText("");
 
         // Display of the first integer to enter
-        String integer_to_display = ""+integer_to_enter;
-        TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+        String integer_to_display = "" + integer_to_enter;
+        TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
         int_to_disp.setText(integer_to_display);
 
+        // Display the help depending of the game mode
+        TextView help = (TextView) findViewById(R.id.help_display);
+        if (noob_mode || normal_mode) {
+            help.setText(help_1);
+        }
+        if (god_mode){
+            help.setText(no_help);
+        }
 
         // Initialize the game status
         String game_status_temp = play_now;
@@ -68,6 +110,11 @@ public class Player_1 extends ActionBarActivity {
 
         TextView textic = (TextView) findViewById(R.id.counter);
         textic.setText("");
+
+        if (noob_mode) {
+            textic.setText("");
+            you_win="Good... :-)";
+        }
 
         try {
             check_and_update_high_score(1);
@@ -111,6 +158,8 @@ public class Player_1 extends ActionBarActivity {
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
+                TextView help = (TextView) findViewById(R.id.help_display);
+                help.setText(help_1);
 
                 TextView bin_seq_entered = (TextView)findViewById(R.id.output);
                 bin_seq_entered.setText("");
@@ -251,7 +300,7 @@ public class Player_1 extends ActionBarActivity {
         last_score_to_display.setText(last_score_to_display_string);
     }
 
-    public void actualize_game_status(String int_bin_to_compare, String entered_bin_seq, TextView act_game_stat ){
+    public void actualize_game_status(String  entered_bin_seq, String int_bin_to_compare, TextView act_game_stat ){
 
         // Find the length of the temp_2 string
         int length_temp_2 = entered_bin_seq.length();
@@ -265,22 +314,27 @@ public class Player_1 extends ActionBarActivity {
             // If it is won, actualize the status accordingly and increment the integer to enter + display
             if ((int_bin_to_compare).equals(entered_bin_seq)){
                 act_game_stat.setText(you_win);
-                flag_new_counter=true;
-                Count.cancel();
-                create_counter(counter_value_global);
-                Count.start();
+                //Restart counter with the new remaining time value
+                if (!noob_mode) {
+                    Count.cancel();
+                    create_counter(counter_value_global);
+                    Count.start();
+                }
                 integer_to_enter ++;
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
+
             }
             // If fail, actualize the status, reset the game + display
-            else{
+            else {
                 act_game_stat.setText(you_fail_try_again);
                 //Stop the timer if the player entered a wrong binary sequence (reset game)
-                Count.cancel();
-                TextView textic = (TextView) findViewById(R.id.counter);
-                textic.setText("");
+                if(!noob_mode) {
+                    Count.cancel();
+                    TextView textic = (TextView) findViewById(R.id.counter);
+                    textic.setText("");
+                }
                 try {
                     check_and_update_high_score(integer_to_enter);
                 } catch (FileNotFoundException e) {
@@ -290,10 +344,66 @@ public class Player_1 extends ActionBarActivity {
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
+                TextView help = (TextView) findViewById(R.id.help_display);
+                help.setText(help_1);
             }
 
         }else {
             act_game_stat.setText(playing);
+        }
+        // Int to binary for the current integer to enter
+        String length_test_current= Integer.toBinaryString(integer_to_enter);
+        // Find the length of the int_bin_to_compare string
+        int length_test_current_int = length_test_current.length();
+        //Update help string
+        if(normal_mode || noob_mode){
+            TextView help = (TextView) findViewById(R.id.help_display);
+            switch(length_test_current_int){
+                case 1:
+                    help.setText(help_1);
+                    break;
+                case 2:
+                    help.setText(help_2);
+                    break;
+                case 3:
+                    help.setText(help_3);
+                    break;
+                case 4:
+                    help.setText(help_4);
+                    break;
+                case 5:
+                    help.setText(help_5);
+                    break;
+                case 6:
+                    help.setText(help_6);
+                    break;
+                case 7:
+                    help.setText(help_7);
+                    break;
+                case 8:
+                    help.setText(help_8);
+                    break;
+            }
+        }
+        if((noob_mode || normal_mode) && (integer_to_enter==max_number_low_difficulty)){
+            //Stop the timer if the player entered a wrong binary sequence (reset game)
+            if(!noob_mode) {
+                Count.cancel();
+                TextView textic = (TextView) findViewById(R.id.counter);
+                textic.setText("");
+            }
+            try {
+                check_and_update_high_score(integer_to_enter);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            integer_to_enter=1;
+            String integer_to_display = ""+integer_to_enter;
+            TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+            int_to_disp.setText(integer_to_display);
+
+            TextView help = (TextView) findViewById(R.id.help_display);
+            help.setText(ready_for_next_difficulty_level);
         }
     }
 
@@ -310,8 +420,8 @@ public class Player_1 extends ActionBarActivity {
 
     public void Modify_string_to_one(View vieuw) {
         //When click to enter the first number (1), start the counter with the initial value 58s +2s= 60s (because he will give automatically a good answer for the first number)
-        if((integer_to_enter == 1)){
-            counter_value_global=28000;
+        if((integer_to_enter == 1 && (!noob_mode))){
+            counter_value_global=initial_timer_value;
             create_counter(counter_value_global);
             Count.start();
         }

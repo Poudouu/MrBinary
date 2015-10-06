@@ -26,16 +26,26 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void Switch_to_player_1(View view) {
+    public void Switch_to_mode_1(View view) {
         Intent intent = new Intent(this, Player_1.class);
+        String str="noob";
+        intent.putExtra("string", str);
         startActivity(intent);
     }
 
-    public void Switch_to_player_2(View view) {
-        Intent intent = new Intent(this, Player_2.class);
+    public void Switch_to_mode_2(View view) {
+        Intent intent = new Intent(this, Player_1.class);
+        String str="normal";
+        intent.putExtra("string", str);
         startActivity(intent);
     }
 
+    public void Switch_to_mode_3(View view) {
+        Intent intent = new Intent(this, Player_1.class);
+        String str="god";
+        intent.putExtra("string", str);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
