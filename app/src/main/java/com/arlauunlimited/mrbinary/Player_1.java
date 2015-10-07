@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.view.View;
 import android.os.CountDownTimer;
+import android.widget.Toast;
 
 
 import java.io.FileInputStream;
@@ -24,7 +25,7 @@ import java.io.OutputStreamWriter;
 public class Player_1 extends ActionBarActivity {
     //Initialization;
     int integer_to_enter=1;
-    int max_number_low_difficulty=33;
+    int max_number_low_difficulty=65;
     int initial_timer_value=30000;
     CountDownTimer Count;
     // Counter value used to create the counter
@@ -176,9 +177,10 @@ public class Player_1 extends ActionBarActivity {
 
         int best_score_to_write=0;
         int actual_best_score=0;
-        char [] inputBuffer = new char [2];
+        char [] inputBuffer = new char [3];
         String best_score_read_1="";
         String best_score_read_2="";
+        String best_score_read_3="";
 
         // Read the actual high score stored in the file game_data.dat stored in the app directory on the device.
         try {
@@ -188,13 +190,14 @@ public class Player_1 extends ActionBarActivity {
             isr.read(inputBuffer);
 
             // See below for explanation of why the read data are put in two strings...
-            best_score_read_1 = String.valueOf(inputBuffer);
-            best_score_read_2= inputBuffer[0]+"";
+            best_score_read_1 = inputBuffer[0]+""+inputBuffer[1]+""+inputBuffer[2]+"";
+            best_score_read_2= inputBuffer[0]+""+inputBuffer[1]+"";
+            best_score_read_3= inputBuffer[0]+"";
 
             // For debugging only
             //Toast.makeText(getApplicationContext(),inputBuffer[0]+"", Toast.LENGTH_LONG).show();
             //Toast.makeText(getApplicationContext(),inputBuffer[1]+"", Toast.LENGTH_LONG).show();
-            //Toast.makeText(getApplicationContext(),best_score_read_1+"", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),best_score_read_2+"", Toast.LENGTH_LONG).show();
             isr.close();
             fileInputStream.close();
         } catch (FileNotFoundException e) {
@@ -206,6 +209,7 @@ public class Player_1 extends ActionBarActivity {
         // Merdier to parse the read high score in char to int... Coudn't find something else working.
         int match_int_1=0;
         int match_int_2=0;
+        int match_int_3=0;
         int i=0;
         // Parse first for two digits integer based on valueOf(inputBuffer), for a reason that I can't explain, it doesn't work if int >10, most probably because there is nothing in inputBuffer[1] in this case...
         // Parse int was not working to convert the string to int so I recreate a function.
@@ -226,14 +230,14 @@ public class Player_1 extends ActionBarActivity {
                     match_int_1 = 1;
                     actual_best_score =i;
                     // For debugging only
-                    //Toast.makeText(getApplicationContext(),"Int 2 digits match found!", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Int 3 digits match found!", Toast.LENGTH_LONG).show();
                 } else {
                     i++;
                 }
-                if (i==100){
+                if (i==1000){
                     match_int_1=1;
                     // For debugging only
-                    //Toast.makeText(getApplicationContext(),"Parse 2 digits int error...", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),"Parse 3 digits int error...", Toast.LENGTH_LONG).show();
                     int j=0;
                     // Parse int<10 if the first while didn't work (i=100) based on the inputBuffer[0] convert to string only.
                     while  (match_int_2 == 0){
@@ -253,14 +257,44 @@ public class Player_1 extends ActionBarActivity {
                                 match_int_2 = 1;
                                 actual_best_score =j;
                                 // For debugging only
-                                //Toast.makeText(getApplicationContext(),"Int 1 digit match found!", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(),"Int 2 digit match found!", Toast.LENGTH_LONG).show();
                             } else {
                                 j++;
                             }
-                            if (j==10){
+                            if (j==100){
                                 match_int_2=1;
                                 // For debugging only
-                                //Toast.makeText(getApplicationContext(),"Parse 1 digit int error...", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(),"Parse 2 digit int error...", Toast.LENGTH_LONG).show();
+                                int k=0;
+                                // Parse int<10 if the first while didn't work (i=100) based on the inputBuffer[0] convert to string only.
+                                while  (match_int_3 == 0){
+                                    if (best_score_read_3 == null){
+                                        match_int_3=1;
+                                        actual_best_score=0;
+                                    }else {
+                                        String temp_2="";
+
+                                        if(k<10){
+                                            temp_2=k+"";
+                                        }else{
+                                            temp_2=k+"";
+                                        }
+
+                                        if ((temp_2).equals(best_score_read_3)) {
+                                            match_int_3 = 1;
+                                            actual_best_score =k;
+                                            // For debugging only
+                                            //Toast.makeText(getApplicationContext(),"Int 1 digit match found!", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            k++;
+                                        }
+                                        if (k==10){
+                                            match_int_3=1;
+                                            // For debugging only
+                                            //Toast.makeText(getApplicationContext(),"Parse 1 digit int error...", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
