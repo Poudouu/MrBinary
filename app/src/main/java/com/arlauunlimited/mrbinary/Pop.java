@@ -28,7 +28,7 @@ public class Pop extends Activity {
     }
 
     public void restart_activity(View view){
-    finish();
+        finish();
     }
 
     public void back_to_main_activity(View view){

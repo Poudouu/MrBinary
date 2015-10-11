@@ -14,6 +14,8 @@ import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
 
+    Boolean Flag_first_start=false;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -23,6 +25,7 @@ public class MainActivity extends ActionBarActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -31,6 +34,11 @@ public class MainActivity extends ActionBarActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        if(!Flag_first_start) {
+            Intent intent = new Intent(this, Presentation_screen.class);
+            startActivity(intent);
+        }
+        Flag_first_start=true;
     }
 
     public void Switch_to_mode_1(View view) {
