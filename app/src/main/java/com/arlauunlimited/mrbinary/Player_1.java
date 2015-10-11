@@ -1,5 +1,6 @@
 package com.arlauunlimited.mrbinary;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
@@ -371,11 +372,16 @@ public class Player_1 extends ActionBarActivity {
                     TextView textic = (TextView) findViewById(R.id.counter);
                     textic.setText("");
                 }
-                try {
+                 try {
                     check_and_update_high_score(integer_to_enter);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+                TextView outputbite = (TextView) findViewById(R.id.output);
+                outputbite.setText(""+0);
+                Intent intent = new Intent(Player_1.this,Pop.class);
+                intent.putExtra("score", integer_to_enter);
+                startActivity(intent);
                 integer_to_enter=1;
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
@@ -501,9 +507,9 @@ public class Player_1 extends ActionBarActivity {
         bin_seq_entered_string=Check_game_status(act_game_status_string,bin_seq_entered_string);
 
         // Add one to bin_seq_entered_string string (because it is the main purpose of the 0 button).
-        String temp_seq_entered=bin_seq_entered_string+"0";
+        String temp_seq_entered=bin_seq_entered_string + "0";
 
-        actualize_game_status(temp_seq_entered,int_bin_to_compare,act_game_stat);
+        actualize_game_status(temp_seq_entered,int_bin_to_compare, act_game_stat);
 
         bin_seq_entered.setText(temp_seq_entered);
     }
@@ -522,4 +528,7 @@ public class Player_1 extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }
