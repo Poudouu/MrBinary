@@ -32,7 +32,7 @@ public class Pop extends Activity {
     }
 
     public void back_to_main_activity(View view){
-        Intent intent = new Intent(Pop.this, MainActivity.class);
+        Intent intent = new Intent(Pop.this, Main_menu.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

@@ -1,21 +1,23 @@
 package com.arlauunlimited.mrbinary;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.content.Intent;
 import android.view.View;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
 
-    Boolean Flag_first_start=false;
-
+/**
+ * Created by criqulau on 11/10/2015.
+ */
+public class MainActivity extends ActionBarActivity{
+    CountDownTimer Count;
+    Button Start_game;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -23,60 +25,61 @@ public class MainActivity extends ActionBarActivity {
         inflater.inflate(R.menu.main_activity_actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.presentation_screen);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        TextView txt1 = (TextView) findViewById(R.id.arlau_unlimited);
+        txt1.setText("");
+        TextView txt2 = (TextView) findViewById(R.id.present);
+        txt2.setText("");
+        TextView txt3 = (TextView) findViewById(R.id.MrBinary);
+        txt3.setText("");
+        Start_game = (Button) findViewById(R.id.start_game);
+        Start_game.setVisibility(View.GONE);
 
-        if(!Flag_first_start) {
-            Intent intent = new Intent(this, Presentation_screen.class);
-            startActivity(intent);
+        create_counter();
+
+        Count.start();
+
+    }
+
+    public void create_counter() {
+        Count = new CountDownTimer(4000, 500) {
+
+            // Action to check at every tic
+            public void onTick(long millisUntilFinished) {
+                if (millisUntilFinished < 3500) {
+                    TextView txt1 = (TextView) findViewById(R.id.arlau_unlimited);
+                    txt1.setText("ARLAU UNLIMITED");
+                }
+                if (millisUntilFinished < 2500) {
+                    TextView txt2 = (TextView) findViewById(R.id.present);
+                    txt2.setText("presents...");
+                }
+                if (millisUntilFinished < 1500) {
+                    TextView txt3 = (TextView) findViewById(R.id.MrBinary);
+                    txt3.setText("Mr Binary");
+                }
+            }
+
+            // Reset of the game when the timeout goes to 0
+            public void onFinish() {
+                Start_game = (Button) findViewById(R.id.start_game);
+                Start_game.setVisibility(View.VISIBLE);
+                this.cancel();
+            }
+        };
+    }
+
+    public void leave_activity(View view) {
+        if(Count!=null){
+            Count.cancel();
         }
-        Flag_first_start=true;
-    }
-
-    public void Switch_to_mode_1(View view) {
-        Intent intent = new Intent(this, Player_1.class);
-        String str="noob";
-        intent.putExtra("string", str);
+        Intent intent = new Intent(this, Main_menu.class);
         startActivity(intent);
-    }
-
-    public void Switch_to_mode_2(View view) {
-        Intent intent = new Intent(this, Player_1.class);
-        String str="normal";
-        intent.putExtra("string", str);
-        startActivity(intent);
-    }
-
-    public void Switch_to_mode_3(View view) {
-        Intent intent = new Intent(this, Player_1.class);
-        String str="god";
-        intent.putExtra("string", str);
-        startActivity(intent);
-    }
-
-    public void view_binary_explanation(View view) {
-        Intent intent = new Intent(this, Player_2.class);
-        startActivity(intent);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-        //return super.onOptionsItemSelected(item);
+        finish();
     }
 }
