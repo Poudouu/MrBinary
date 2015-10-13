@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ARLAU UNLIMITED"
+        android:id="@+id/arlau_unlimited"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="present..."
+    android:id="@+id/present"
+    android:textSize="30sp"
+    android:textColor="#ffffff"
+    android:layout_below="@+id/arlau_unlimited"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mr Binary"
+        android:id="@+id/MrBinary"
+        android:textSize="40sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/present"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="75dp"
+        android:text="Start Game"
+        android:onClick="leave_activity"
+        android:id="@+id/start_game"
+        android:layout_below="@+id/MrBinary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+/>
+
+
+</RelativeLayout>

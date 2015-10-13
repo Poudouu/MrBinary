@@ -11,6 +11,9 @@ import android.os.CountDownTimer;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -123,6 +126,11 @@ public class Player_1 extends ActionBarActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        AdView mAdView = (AdView) findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
@@ -377,8 +385,6 @@ public class Player_1 extends ActionBarActivity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                TextView outputbite = (TextView) findViewById(R.id.output);
-                outputbite.setText(""+0);
                 Intent intent = new Intent(Player_1.this,Pop.class);
                 intent.putExtra("score", integer_to_enter);
                 startActivity(intent);
