@@ -27,17 +27,6 @@
         android:layout_marginTop="60dp"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Yourscore"
-        android:id="@+id/Score"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/textView6"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,5 +49,37 @@
         />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/textView6">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Yourscore"
+            android:id="@+id/Score"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/textView6"
+            android:layout_gravity="center_vertical" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:id="@+id/share"
+            android:layout_height="30dp"
+            android:src="@drawable/fblogo1"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:background="@null"
+            android:onClick="shareOnFacebook"/>
+    </LinearLayout>
+
+
 
 </RelativeLayout>

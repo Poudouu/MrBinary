@@ -7,9 +7,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
 
 
 /**
@@ -29,8 +31,9 @@ public class MainActivity extends ActionBarActivity{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.presentation_screen);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        this.getWindow().addFlags(Window.FEATURE_NO_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         TextView txt1 = (TextView) findViewById(R.id.arlau_unlimited);
         txt1.setText("");
         TextView txt2 = (TextView) findViewById(R.id.present);
