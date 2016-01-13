@@ -3,6 +3,7 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="com.myapplication.myapplication.Player_1">
 
     <com.google.android.gms.ads.AdView
@@ -15,79 +16,93 @@
         ads:adUnitId="@string/banner2_ad_unit_id">
     </com.google.android.gms.ads.AdView>
 
-    <Button
-        android:layout_width="125dp"
-        android:layout_height="75dp"
-        android:text="@string/one"
+    <View
+        android:id="@+id/fakeView"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/button_1"
         android:onClick="Modify_string_to_one"
         android:id="@+id/button3"
-        android:layout_below="@+id/output"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="25dp"
+        android:layout_toLeftOf="@id/fakeView"
+        android:layout_above="@+id/adView2" />
 
-    <Button
-        android:layout_width="125dp"
-        android:layout_height="75dp"
-        android:text="@string/zero"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/button_0"
         android:onClick="Modify_string_to_zero"
         android:id="@+id/button4"
-        android:layout_below="@+id/output"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp" />
+        android:layout_toRightOf="@id/fakeView"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/adView2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="50dp"
         android:id="@+id/output"
         android:text="@string/entered_binary_seq"
         android:textSize="30sp"
-        android:layout_below="@+id/help_display"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/button3"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="30dp"
+        android:background="#A9AFAFAF"
+        android:layout_centerHorizontal="true"
+        android:autoText="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/help_display"
         android:text="help_display"
+        android:visibility="invisible"
         android:textSize="20sp"
         android:layout_below="@+id/int_to_disp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/game_mode"
-        android:text="game_mode"
-        android:textSize="13sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <TextView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/int_to_disp"
-        android:textSize="30sp"
-        android:text="@string/Int_to_enter"
-        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:id="@+id/bubleint_to_enter"
+        android:layout_marginTop="30dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Number to enter:"
-        android:textSize="25sp"
-        android:id="@+id/textView"
-        android:layout_below="@+id/Actual_game_status"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"/>
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@null"
+            android:src="@drawable/bubble" />
+
+        <TextView
+            android:id="@+id/int_to_disp"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:text="11"
+            android:layout_marginBottom="7dp"
+            android:gravity="center" />
+
+    </FrameLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Actual_game_status"
+        android:visibility="invisible"
         android:textSize="25sp"
         android:text="@string/game_status"
         android:layout_below="@+id/counter"
@@ -102,8 +117,11 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true" />
+        android:minWidth="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="#A9AFAFAF"
+        android:textColor="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -123,5 +141,27 @@
         android:textSize="13sp"
         android:layout_below="@+id/best_score"
         android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@id/fakeView"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/small_binabot"
+        android:layout_above="@+id/output"
+        android:src="@drawable/small_binabot" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/game_mode"
+        android:layout_below="@+id/imageView3"
+        android:layout_alignLeft="@+id/button4"
+        android:visibility="invisible"
+        android:layout_alignStart="@+id/button4" />
 
 </RelativeLayout>

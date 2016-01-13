@@ -1,10 +1,16 @@
 package com.arlauunlimited.mrbinary;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.View;
 import android.os.CountDownTimer;
@@ -26,7 +32,7 @@ import java.io.OutputStreamWriter;
 /**
  * Created by i7-3930 on 17/08/2015.
  */
-public class Player_1 extends ActionBarActivity {
+public class Player_1 extends Activity {
     //Initialization;
     int integer_to_enter=1;
     int max_number_low_difficulty=65;
@@ -349,7 +355,8 @@ public class Player_1 extends ActionBarActivity {
 
         // Find the length of the temp_2 string
         int length_temp_2 = entered_bin_seq.length();
-
+        RelativeLayout rl= (RelativeLayout) act_game_stat.getParent();
+        ImageView bot = (ImageView) rl.findViewById(R.id.small_binabot);
         // Find the length of the int_bin_to_compare string
         int length_test = int_bin_to_compare.length();
 
@@ -359,6 +366,36 @@ public class Player_1 extends ActionBarActivity {
             // If it is won, actualize the status accordingly and increment the integer to enter + display
             if ((int_bin_to_compare).equals(entered_bin_seq)){
                 act_game_stat.setText(you_win);
+                TextView tv = (TextView) rl.findViewById(R.id.output);
+                tv.setText("");
+                if (int_bin_to_compare.equals("111")) {
+                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                    layoutParams.width = 250;
+                    layoutParams.height = 350;
+                    bot.setLayoutParams(layoutParams);
+                    bot.setImageResource(R.drawable.small_mid_binabot);
+                }
+                if (int_bin_to_compare.equals("1111")) {
+                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                    layoutParams.width = 300;
+                    layoutParams.height = 400;
+                    bot.setLayoutParams(layoutParams);
+                    bot.setImageResource(R.drawable.middle_binabot);
+                }
+                if (int_bin_to_compare.equals("11111")) {
+                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                    layoutParams.width = 300;
+                    layoutParams.height = 400;
+                    bot.setLayoutParams(layoutParams);
+                    bot.setImageResource(R.drawable.stache_binabot);
+                }
+                if (int_bin_to_compare.equals("111111")) {
+                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                    layoutParams.width = 300;
+                    layoutParams.height = 400;
+                    bot.setLayoutParams(layoutParams);
+                    bot.setImageResource(R.drawable.pimp_binabot);
+                }
                 //Restart counter with the new remaining time value
                 if (!noob_mode) {
                     Count.cancel();
@@ -389,6 +426,11 @@ public class Player_1 extends ActionBarActivity {
                 intent.putExtra("score", integer_to_enter);
                 startActivity(intent);
                 integer_to_enter=1;
+                android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                layoutParams.width = 100;
+                layoutParams.height = 100;
+                bot.setLayoutParams(layoutParams);
+                bot.setImageResource(R.drawable.small_binabot);
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
