@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="height_bub">45dp</dimen>
     <dimen name="width_bub">16sp</dimen>
+    <dimen name="textsizecounter">9sp</dimen>
+
 </resources>

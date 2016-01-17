@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -136,6 +137,8 @@ public class Player_1 extends Activity {
         textic.setTypeface(tf);
         textic.setText("");
 
+        TextView countertxt = (TextView) findViewById(R.id.countertxt);
+        countertxt.setTypeface(tf);
         if (noob_mode) {
             textic.setText("");
             you_win="Good... :-)";
@@ -147,6 +150,26 @@ public class Player_1 extends Activity {
             e.printStackTrace();
         }
 
+        //Define listener for buttons
+        FrameLayout but1= (FrameLayout) findViewById(R.id.button3);
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Modify_string_to_one(v);
+            }
+        });
+
+        FrameLayout but0= (FrameLayout) findViewById(R.id.button4);
+        but0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Modify_string_to_zero(v);
+            }
+        });
+        TextView best_score_display = (TextView)findViewById(R.id.best_score);
+        best_score_display.setTypeface(tf);
+        TextView last_score_display = (TextView)findViewById(R.id.last_score);
+        last_score_display.setTypeface(tf);
         AdView mAdView = (AdView) findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
