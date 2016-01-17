@@ -3,6 +3,7 @@ package com.arlauunlimited.mrbinary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -80,9 +81,10 @@ public class Player_1 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_1_layout);
-
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
         //Game mode parametrization
         TextView game_mode = (TextView) findViewById(R.id.game_mode);
+        game_mode.setTypeface(tf);
         String str = (String) getIntent().getSerializableExtra("string");
         if ((str).equals("noob")) {
             noob_mode = true;
@@ -106,14 +108,17 @@ public class Player_1 extends Activity {
         // Initialize the entered binary string to ""
         TextView output = (TextView) findViewById(R.id.output);
         output.setText("");
+        output.setTypeface(tf, Typeface.BOLD);
 
         // Display of the first integer to enter
         String integer_to_display = "" + integer_to_enter;
         TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
+        int_to_disp.setTypeface(tf);
         int_to_disp.setText(integer_to_display);
 
         // Display the help depending of the game mode
         TextView help = (TextView) findViewById(R.id.help_display);
+        help.setTypeface(tf);
         if (noob_mode || normal_mode) {
             help.setText(help_1);
         }
@@ -124,9 +129,11 @@ public class Player_1 extends Activity {
         // Initialize the game status
         String game_status_temp = play_now;
         TextView Actual_game_status = (TextView)findViewById(R.id.Actual_game_status);
+        Actual_game_status.setTypeface(tf);
         Actual_game_status.setText(game_status_temp);
 
         TextView textic = (TextView) findViewById(R.id.counter);
+        textic.setTypeface(tf);
         textic.setText("");
 
         if (noob_mode) {
@@ -143,13 +150,9 @@ public class Player_1 extends Activity {
         AdView mAdView = (AdView) findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        TextView count=(TextView) findViewById(R.id.counter);
+        count.setTypeface(tf);
 
-    }
-
-    public int dptopixel(int dp){
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
@@ -382,31 +385,16 @@ public class Player_1 extends Activity {
                 tv.setText("");
                 YoYo.with(Techniques.Bounce).duration(500).playOn(tv);
                 if (int_bin_to_compare.equals("111")) {
-                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                    layoutParams.width = 250;
-                    layoutParams.height = 350;
-                    bot.setLayoutParams(layoutParams);
-                    bot.setImageResource(R.drawable.small_mid_binabot);
+                     bot.setImageResource(R.drawable.small_mid_binabot);
                 }
                 if (int_bin_to_compare.equals("1111")) {
-                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                    layoutParams.width = 300;
-                    layoutParams.height = 400;
-                    bot.setLayoutParams(layoutParams);
+
                     bot.setImageResource(R.drawable.middle_binabot);
                 }
-                if (int_bin_to_compare.equals("11111")) {
-                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                    layoutParams.width = 300;
-                    layoutParams.height = 400;
-                    bot.setLayoutParams(layoutParams);
-                    bot.setImageResource(R.drawable.stache_binabot);
-                }
                 if (int_bin_to_compare.equals("111111")) {
-                    android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                    layoutParams.width = 300;
-                    layoutParams.height = 400;
-                    bot.setLayoutParams(layoutParams);
+                   bot.setImageResource(R.drawable.stache_binabot);
+                }
+                if (int_bin_to_compare.equals("1111111")) {
                     bot.setImageResource(R.drawable.pimp_binabot);
                 }
                 //Restart counter with the new remaining time value
@@ -448,10 +436,6 @@ public class Player_1 extends Activity {
                         intent.putExtra("score", integer_to_enter);
                         startActivity(intent);
                         integer_to_enter=1;
-                        android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                        layoutParams.width = dptopixel(100);
-                        layoutParams.height = dptopixel(100);
-                        bot.setLayoutParams(layoutParams);
                         bot.setImageResource(R.drawable.small_binabot);
                         String integer_to_display = ""+integer_to_enter;
                         TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);

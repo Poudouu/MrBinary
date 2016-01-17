@@ -24,42 +24,49 @@
         android:background="@android:color/transparent" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/height_bub"
+        android:layout_height="@dimen/width_bub"
         android:src="@drawable/button_1"
         android:onClick="Modify_string_to_one"
         android:id="@+id/button3"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginRight="20dp"
         android:layout_toLeftOf="@id/fakeView"
         android:layout_above="@+id/adView2" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/height_bub"
+        android:layout_height="@dimen/width_bub"
         android:src="@drawable/button_0"
         android:onClick="Modify_string_to_zero"
         android:id="@+id/button4"
         android:layout_toRightOf="@id/fakeView"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:layout_above="@+id/adView2" />
-
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/blackline"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/line"
+        android:layout_above="@id/button4"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="100dp"
+        android:minWidth="80dp"
         android:id="@+id/output"
         android:text="@string/entered_binary_seq"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="30sp"
-        android:layout_above="@id/button3"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="10dp"
-        android:background="#A9AFAFAF"
+        android:textSize="@dimen/textsize"
+        android:textColor="#FF000000"
+        android:layout_above="@id/line"
+        android:background="#00A1BECE"
         android:layout_centerHorizontal="true"
         android:autoText="false" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,26 +82,25 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="@dimen/width_bub"
         android:layout_centerHorizontal="true"
+        android:id="@+id/ln"
+        android:layout_marginBottom="20dp"
+        android:background="#FFA1BECE"
         android:layout_above="@id/output">
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@null"
-            android:src="@drawable/bubble" />
 
         <TextView
             android:id="@+id/int_to_disp"
             android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:minWidth="50dp"
-            android:textSize="30sp"
+            android:layout_width="fill_parent"
+            android:textSize="@dimen/textsize"
             android:layout_gravity="center"
-            android:layout_marginTop="7dp"
+            android:layout_margin="10dp"
             android:text="11"
+            android:textColor="#FF000000"
             android:gravity="center"
-            android:background="#ffffff" />
+            android:background="#00FFFFFF"
+            android:textIsSelectable="false" />
 
     </FrameLayout>
 
@@ -116,20 +122,20 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="@dimen/textsize"
         android:gravity="center"
         android:minWidth="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:background="#A9AFAFAF"
-        android:textColor="#ffffff" />
+        android:background="#00A1BECE"
+        android:textColor="#FF000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/best_score"
         android:id="@+id/best_score"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -139,14 +145,17 @@
         android:layout_height="wrap_content"
         android:text="@string/last_score"
         android:id="@+id/last_score"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:layout_below="@+id/best_score"
         android:layout_alignParentRight="true" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ln"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/counter"
         android:layout_centerHorizontal="true"
         android:id="@+id/small_binabot"
         android:src="@drawable/small_binabot" />
