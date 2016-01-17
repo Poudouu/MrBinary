@@ -1,11 +1,14 @@
 package com.arlauunlimited.mrbinary;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,8 +20,11 @@ import android.os.CountDownTimer;
 import android.widget.Toast;
 
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.nineoldandroids.animation.Animator;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -48,6 +54,7 @@ public class Player_1 extends Activity {
     boolean noob_mode=false;
     boolean normal_mode=false;
     boolean god_mode=false;
+    Context context=Player_1.this;
 
     String play_now="Play now!";
     String you_fail_try_again="You fail! Try again!";
@@ -137,6 +144,12 @@ public class Player_1 extends Activity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+    }
+
+    public int dptopixel(int dp){
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
@@ -351,23 +364,23 @@ public class Player_1 extends Activity {
         last_score_to_display.setText(last_score_to_display_string);
     }
 
-    public void actualize_game_status(String  entered_bin_seq, String int_bin_to_compare, TextView act_game_stat ){
+    public void actualize_game_status(String  entered_bin_seq, String int_bin_to_compare, final TextView act_game_stat ){
 
         // Find the length of the temp_2 string
         int length_temp_2 = entered_bin_seq.length();
         RelativeLayout rl= (RelativeLayout) act_game_stat.getParent();
-        ImageView bot = (ImageView) rl.findViewById(R.id.small_binabot);
+        final ImageView bot = (ImageView) rl.findViewById(R.id.small_binabot);
         // Find the length of the int_bin_to_compare string
         int length_test = int_bin_to_compare.length();
-
+        TextView tv = (TextView) rl.findViewById(R.id.output);
         // If both string have the same length, it means that the game has to define if the player can continue or stop (game finished and reset)
         if (length_temp_2 == length_test)
         {
             // If it is won, actualize the status accordingly and increment the integer to enter + display
             if ((int_bin_to_compare).equals(entered_bin_seq)){
                 act_game_stat.setText(you_win);
-                TextView tv = (TextView) rl.findViewById(R.id.output);
                 tv.setText("");
+                YoYo.with(Techniques.Bounce).duration(500).playOn(tv);
                 if (int_bin_to_compare.equals("111")) {
                     android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
                     layoutParams.width = 250;
@@ -410,34 +423,56 @@ public class Player_1 extends Activity {
             }
             // If fail, actualize the status, reset the game + display
             else {
-                act_game_stat.setText(you_fail_try_again);
-                //Stop the timer if the player entered a wrong binary sequence (reset game)
-                if(!noob_mode) {
-                    Count.cancel();
-                    TextView textic = (TextView) findViewById(R.id.counter);
-                    textic.setText("");
-                }
-                 try {
-                    check_and_update_high_score(integer_to_enter);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(Player_1.this,Pop.class);
-                intent.putExtra("score", integer_to_enter);
-                startActivity(intent);
-                integer_to_enter=1;
-                android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
-                layoutParams.width = 100;
-                layoutParams.height = 100;
-                bot.setLayoutParams(layoutParams);
-                bot.setImageResource(R.drawable.small_binabot);
-                String integer_to_display = ""+integer_to_enter;
-                TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
-                int_to_disp.setText(integer_to_display);
-                if(noob_mode || normal_mode) {
-                    TextView help = (TextView) findViewById(R.id.help_display);
-                    help.setText(help_1);
-                }
+                tv.setText("You Failed !");
+                YoYo.with(Techniques.Wobble).duration(1000).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        act_game_stat.setText(you_fail_try_again);
+                        //Stop the timer if the player entered a wrong binary sequence (reset game)
+                        if(!noob_mode) {
+                            Count.cancel();
+                            TextView textic = (TextView) findViewById(R.id.counter);
+                            textic.setText("");
+                        }
+                        try {
+                            check_and_update_high_score(integer_to_enter);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        Intent intent = new Intent(Player_1.this,Pop.class);
+                        intent.putExtra("score", integer_to_enter);
+                        startActivity(intent);
+                        integer_to_enter=1;
+                        android.view.ViewGroup.LayoutParams layoutParams = bot.getLayoutParams();
+                        layoutParams.width = dptopixel(100);
+                        layoutParams.height = dptopixel(100);
+                        bot.setLayoutParams(layoutParams);
+                        bot.setImageResource(R.drawable.small_binabot);
+                        String integer_to_display = ""+integer_to_enter;
+                        TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
+                        int_to_disp.setText(integer_to_display);
+                        if(noob_mode || normal_mode) {
+                            TextView help = (TextView) findViewById(R.id.help_display);
+                            help.setText(help_1);
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                }).playOn(tv);
+
             }
 
         }else {

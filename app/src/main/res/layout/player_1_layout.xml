@@ -3,7 +3,7 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/background_xhdpi"
     tools:context="com.myapplication.myapplication.Player_1">
 
     <com.google.android.gms.ads.AdView
@@ -48,13 +48,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="50dp"
+        android:minWidth="100dp"
         android:id="@+id/output"
         android:text="@string/entered_binary_seq"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:textSize="30sp"
-        android:layout_above="@+id/button3"
+        android:layout_above="@id/button3"
         android:textColor="#ffffff"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:background="#A9AFAFAF"
         android:layout_centerHorizontal="true"
         android:autoText="false" />
@@ -66,7 +68,6 @@
         android:text="help_display"
         android:visibility="invisible"
         android:textSize="20sp"
-        android:layout_below="@+id/int_to_disp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
@@ -75,9 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/bubleint_to_enter"
-        android:layout_marginTop="30dp">
-
+        android:layout_above="@id/output">
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="150dp"
@@ -88,12 +87,14 @@
         <TextView
             android:id="@+id/int_to_disp"
             android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
+            android:minWidth="50dp"
             android:textSize="30sp"
             android:layout_gravity="center"
+            android:layout_marginTop="7dp"
             android:text="11"
-            android:layout_marginBottom="7dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:background="#ffffff" />
 
     </FrameLayout>
 
@@ -112,7 +113,7 @@
     <TextView
         android:id="@+id/counter"
         android:text="Counter"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -145,11 +146,9 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_toLeftOf="@id/fakeView"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/small_binabot"
-        android:layout_above="@+id/output"
         android:src="@drawable/small_binabot" />
 
 
@@ -159,7 +158,6 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/game_mode"
-        android:layout_below="@+id/imageView3"
         android:layout_alignLeft="@+id/button4"
         android:visibility="invisible"
         android:layout_alignStart="@+id/button4" />
