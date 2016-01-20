@@ -1,18 +1,24 @@
 package com.arlauunlimited.mrbinary;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +30,8 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nineoldandroids.animation.Animator;
@@ -57,7 +65,8 @@ public class Player_1 extends Activity {
     boolean normal_mode=false;
     boolean god_mode=false;
     Context context=Player_1.this;
-
+    Dialog dialog = null;
+    Typeface tf = null;
     String play_now="Play now!";
     String you_fail_try_again="You fail! Try again!";
     String time_over="Time over!";
@@ -78,12 +87,16 @@ public class Player_1 extends Activity {
     String help_7="help: 64-32-16-8-4-2-1";
     String help_8="help: 128-64-32-16-8-4-2-1";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_1_layout);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.player_1_layout);
+        dialog=new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.popup_gameover);
+        dialog.setCanceledOnTouchOutside(false);
         //Game mode parametrization
+        tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
         TextView game_mode = (TextView) findViewById(R.id.game_mode);
         game_mode.setTypeface(tf);
         String str = (String) getIntent().getSerializableExtra("string");
@@ -129,7 +142,7 @@ public class Player_1 extends Activity {
 
         // Initialize the game status
         String game_status_temp = play_now;
-        TextView Actual_game_status = (TextView)findViewById(R.id.Actual_game_status);
+        final TextView Actual_game_status = (TextView)findViewById(R.id.Actual_game_status);
         Actual_game_status.setTypeface(tf);
         Actual_game_status.setText(game_status_temp);
 
@@ -155,7 +168,7 @@ public class Player_1 extends Activity {
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Modify_string_to_one(v);
+                Modify_string_to_one(v,Actual_game_status);
             }
         });
 
@@ -163,7 +176,7 @@ public class Player_1 extends Activity {
         but0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Modify_string_to_zero(v);
+                Modify_string_to_zero(v,Actual_game_status);
             }
         });
         TextView best_score_display = (TextView)findViewById(R.id.best_score);
@@ -394,8 +407,10 @@ public class Player_1 extends Activity {
 
         // Find the length of the temp_2 string
         int length_temp_2 = entered_bin_seq.length();
-        RelativeLayout rl= (RelativeLayout) act_game_stat.getParent();
+        final RelativeLayout rl= (RelativeLayout) act_game_stat.getParent();
         final ImageView bot = (ImageView) rl.findViewById(R.id.small_binabot);
+        final TextView textic = (TextView) findViewById(R.id.counter);
+        final TextView out = (TextView) findViewById(R.id.output);
         // Find the length of the int_bin_to_compare string
         int length_test = int_bin_to_compare.length();
         TextView tv = (TextView) rl.findViewById(R.id.output);
@@ -405,8 +420,8 @@ public class Player_1 extends Activity {
             // If it is won, actualize the status accordingly and increment the integer to enter + display
             if ((int_bin_to_compare).equals(entered_bin_seq)){
                 act_game_stat.setText(you_win);
-                tv.setText("");
                 YoYo.with(Techniques.Bounce).duration(500).playOn(tv);
+                tv.setTextColor(Color.parseColor("#ffA1BECE"));
                 if (int_bin_to_compare.equals("111")) {
                      bot.setImageResource(R.drawable.small_mid_binabot);
                 }
@@ -434,30 +449,60 @@ public class Player_1 extends Activity {
             }
             // If fail, actualize the status, reset the game + display
             else {
-                tv.setText("You Failed !");
                 YoYo.with(Techniques.Wobble).duration(1000).withListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
-
+                        act_game_stat.setText(you_fail_try_again);
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        act_game_stat.setText(you_fail_try_again);
                         //Stop the timer if the player entered a wrong binary sequence (reset game)
                         if(!noob_mode) {
                             Count.cancel();
-                            TextView textic = (TextView) findViewById(R.id.counter);
                             textic.setText("");
+                            out.setText("");
                         }
                         try {
                             check_and_update_high_score(integer_to_enter);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
-                        Intent intent = new Intent(Player_1.this,Pop.class);
-                        intent.putExtra("score", integer_to_enter);
-                        startActivity(intent);
+
+                        TextView tv = (TextView) dialog.findViewById(R.id.youlost);
+                        tv.setTypeface(tf);
+                        tv=(TextView) dialog.findViewById(R.id.textView6);
+                        tv.setTypeface(tf);
+                        tv=(TextView) dialog.findViewById(R.id.Score);
+                        tv.setTypeface(tf);
+                        tv.setText("" + integer_to_enter);
+                        tv=(TextView) dialog.findViewById(R.id.restart);
+                        tv.setTypeface(tf);
+                        tv=(TextView) dialog.findViewById(R.id.exit);
+                        tv.setTypeface(tf);
+                        FrameLayout fl = (FrameLayout)dialog.findViewById(R.id.leave_activity);
+                        fl.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                back_to_main_activity(v);
+                            }
+                        });
+                        fl = (FrameLayout) dialog.findViewById(R.id.restart_activity);
+                        fl.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                restart_activity(v);
+                            }
+                        });
+
+                        ImageButton ib = (ImageButton) dialog.findViewById(R.id.share);
+                        ib.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                shareOnFacebook(v);
+                            }
+                        });
+                        dialog.show();
                         integer_to_enter=1;
                         bot.setImageResource(R.drawable.small_binabot);
                         String integer_to_display = ""+integer_to_enter;
@@ -484,6 +529,7 @@ public class Player_1 extends Activity {
 
         }else {
             act_game_stat.setText(playing);
+            tv.setTextColor(Color.parseColor("#FF000000"));
         }
         // Int to binary for the current integer to enter
         String length_test_current= Integer.toBinaryString(integer_to_enter);
@@ -523,8 +569,8 @@ public class Player_1 extends Activity {
             //Stop the timer if the player entered a wrong binary sequence (reset game)
             if(!noob_mode) {
                 Count.cancel();
-                TextView textic = (TextView) findViewById(R.id.counter);
-                textic.setText("");
+                TextView texticx = (TextView) findViewById(R.id.counter);
+                texticx.setText("");
             }
             try {
                 check_and_update_high_score(integer_to_enter);
@@ -552,57 +598,99 @@ public class Player_1 extends Activity {
         return output;
     }
 
-    public void Modify_string_to_one(View vieuw) {
-        //When click to enter the first number (1), start the counter with the initial value 58s +2s= 60s (because he will give automatically a good answer for the first number)
-        if((integer_to_enter == 1 && (!noob_mode))){
-            counter_value_global=initial_timer_value;
-            create_counter(counter_value_global);
-            Count.start();
+    public void Modify_string_to_one(View vieuw, TextView actual_game_status) {
+
+        if (!actual_game_status.toString().equals(you_fail_try_again) || !actual_game_status.toString().equals(timeout_try_again)) {
+            //When click to enter the first number (1), start the counter with the initial value 58s +2s= 60s (because he will give automatically a good answer for the first number)
+            if ((integer_to_enter == 1 && (!noob_mode))) {
+                counter_value_global = initial_timer_value;
+                create_counter(counter_value_global);
+                Count.start();
+            }
+
+            // Int to binary for the next integer to enter
+            String int_bin_to_compare = Integer.toBinaryString(integer_to_enter);
+
+            // Take the content of the actual entered binary sequence and convert to string type
+            TextView bin_seq_entered = (TextView) findViewById(R.id.output);
+            String bin_seq_entered_string = (String) bin_seq_entered.getText().toString();
+
+            // Take the content of the actual game status and convert to string type
+            TextView act_game_stat = (TextView) findViewById(R.id.Actual_game_status);
+            String act_game_status_string = (String) act_game_stat.getText().toString();
+
+            bin_seq_entered_string = Check_game_status(act_game_status_string, bin_seq_entered_string);
+
+            // Add one to bin_seq_entered_string string (because it is the main purpose of the 1 button).
+            String temp_seq_entered = bin_seq_entered_string + "1";
+
+            actualize_game_status(temp_seq_entered, int_bin_to_compare, act_game_stat);
+
+            bin_seq_entered.setText(temp_seq_entered);
         }
-
-        // Int to binary for the next integer to enter
-        String int_bin_to_compare= Integer.toBinaryString(integer_to_enter);
-
-        // Take the content of the actual entered binary sequence and convert to string type
-        TextView bin_seq_entered = (TextView)findViewById(R.id.output);
-        String bin_seq_entered_string = (String) bin_seq_entered.getText().toString();
-
-        // Take the content of the actual game status and convert to string type
-        TextView act_game_stat = (TextView)findViewById(R.id.Actual_game_status);
-        String act_game_status_string = (String) act_game_stat.getText().toString();
-
-        bin_seq_entered_string=Check_game_status(act_game_status_string,bin_seq_entered_string);
-
-        // Add one to bin_seq_entered_string string (because it is the main purpose of the 1 button).
-        String temp_seq_entered=bin_seq_entered_string+"1";
-
-        actualize_game_status(temp_seq_entered,int_bin_to_compare,act_game_stat);
-
-        bin_seq_entered.setText(temp_seq_entered);
     }
 
-    public void Modify_string_to_zero(View vieuw) {
+    public void Modify_string_to_zero(View vieuw, TextView actual_game_status) {
+        if (!actual_game_status.toString().equals(you_fail_try_again) || !actual_game_status.toString().equals(timeout_try_again)) {
 
-        // Int to binary for the next integer to enter
-        String int_bin_to_compare= Integer.toBinaryString(integer_to_enter);
+            // Int to binary for the next integer to enter
+            String int_bin_to_compare = Integer.toBinaryString(integer_to_enter);
 
-        // Take the content of the actual entered binary sequence and convert to string type
-        TextView bin_seq_entered = (TextView)findViewById(R.id.output);
-        String bin_seq_entered_string = (String) bin_seq_entered.getText().toString();
+            // Take the content of the actual entered binary sequence and convert to string type
+            TextView bin_seq_entered = (TextView) findViewById(R.id.output);
+            String bin_seq_entered_string = (String) bin_seq_entered.getText().toString();
 
-        // Take the content of the actual game status and convert to string type
-        TextView act_game_stat = (TextView)findViewById(R.id.Actual_game_status);
-        String act_game_status_string = (String) act_game_stat.getText().toString();
+            // Take the content of the actual game status and convert to string type
+            TextView act_game_stat = (TextView) findViewById(R.id.Actual_game_status);
+            String act_game_status_string = (String) act_game_stat.getText().toString();
 
-        bin_seq_entered_string=Check_game_status(act_game_status_string,bin_seq_entered_string);
+            bin_seq_entered_string = Check_game_status(act_game_status_string, bin_seq_entered_string);
 
-        // Add one to bin_seq_entered_string string (because it is the main purpose of the 0 button).
-        String temp_seq_entered=bin_seq_entered_string + "0";
+            // Add one to bin_seq_entered_string string (because it is the main purpose of the 0 button).
+            String temp_seq_entered = bin_seq_entered_string + "0";
 
-        actualize_game_status(temp_seq_entered,int_bin_to_compare, act_game_stat);
+            actualize_game_status(temp_seq_entered, int_bin_to_compare, act_game_stat);
 
-        bin_seq_entered.setText(temp_seq_entered);
+            bin_seq_entered.setText(temp_seq_entered);
+        }
     }
+
+    public void restart_activity(View view){
+        dialog.cancel();
+    }
+
+    public void back_to_main_activity(View view){
+        finish();
+    }
+
+    public void shareOnFacebook(View view){
+        Intent mIntent = getIntent();
+        ShareDialog shareDialog;
+        int integer_to_enter = mIntent.getIntExtra("score", 0);
+        shareDialog = new ShareDialog(this);
+        if (ShareDialog.canShow(ShareLinkContent.class))
+        {
+            Log.e("Test", "inside shareOnFacebook()");
+
+            //            ShareLinkContent shareLinkContent = new ShareLinkContent.Builder().setContentDescription(content).build();
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("New high score !")
+                    .setContentDescription(
+                            "score :" + integer_to_enter)
+                    .build();
+            if(linkContent!=null) {
+                shareDialog.show(linkContent);
+            }
+            else {
+                Toast.makeText(this, "NULL", Toast.LENGTH_LONG).show();
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "NOT CALLED", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

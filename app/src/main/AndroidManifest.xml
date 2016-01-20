@@ -40,9 +40,6 @@
                 android:value="com.arlauunlimited.mrbinary.MainActivity" />
         </activity>
 
-        <activity android:name=".Pop"
-        android:theme="@style/AppTheme.CustomTheme"
-        ></activity>
         <activity android:name=".Main_menu"
             android:theme="@style/AppTheme.CustomTheme"
             ></activity>
