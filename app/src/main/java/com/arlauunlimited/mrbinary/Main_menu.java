@@ -1,5 +1,7 @@
 package com.arlauunlimited.mrbinary;
 
+import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +11,15 @@ import android.content.Intent;
 import android.view.View;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class Main_menu extends ActionBarActivity {
+public class Main_menu extends Activity {
 
+    Typeface tf = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -27,11 +33,17 @@ public class Main_menu extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        this.getWindow().addFlags(Window.FEATURE_NO_TITLE);
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
+        TextView textView= (TextView) findViewById(R.id.playtv);
+        textView.setTypeface(tf);
+        textView = (TextView) findViewById(R.id.helptv);
+        textView.setTypeface(tf);
+        textView = (TextView) findViewById(R.id.tutotv);
+        textView.setTypeface(tf);
 
     }
 

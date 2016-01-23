@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/background_xhdpi"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -15,91 +14,92 @@
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Noob_selection"
-        android:onClick="Switch_to_mode_1"
-        android:id="@+id/button"
-        android:layout_below="@+id/noob_mode_description"
+        android:layout_above="@+id/ln"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        />
+        android:src="@drawable/opening_binary"
+        android:layout_margin="@dimen/activity_vertical_margin" />
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Normal_selection"
-        android:onClick="Switch_to_mode_2"
-        android:id="@+id/button2"
-        android:layout_below="@+id/normal_mode_description"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        />
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/ln">
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/width_bub"
+            android:id="@+id/tutorial"
+            android:onClick="Switch_to_mode_1"
+            android:layout_marginBottom="20dp"
+            android:background="#FF878787">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/God_selection"
-        android:onClick="Switch_to_mode_3"
-        android:id="@+id/button3"
-        android:layout_below="@+id/god_mode_description"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
-        />
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textsize"
+                android:id="@+id/tutotv"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="TUTORIAL"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="#00FFFFFF"
+                android:textIsSelectable="false" />
+        </FrameLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WTF is the binary? :o"
-        android:onClick="view_binary_explanation"
-        android:id="@+id/button4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/width_bub"
+            android:id="@+id/play"
+            android:layout_marginBottom="20dp"
+            android:onClick="Switch_to_mode_3"
+            android:background="#FF575757">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Game difficulty"
-        android:textSize="27sp"
-        android:layout_marginTop="6dp"
-        android:id="@+id/textView"
-        android:layout_below="@id/button4"
-        android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textsize"
+                android:id="@+id/playtv"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="PLAY"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="#00878787"
+                android:textIsSelectable="false" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="bottom"
+            android:minWidth="@dimen/width_bub"
+            android:id="@+id/help"
+            android:layout_marginBottom="20dp"
+            android:onClick="Switch_to_mode_3"
+            android:background="#FFA1BECE">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Practice mode. An help is displayed. No time attack mode, just practice until number 64!"
-        android:gravity="center"
-        android:textSize="13sp"
-        android:layout_marginTop="4dp"
-        android:id="@+id/noob_mode_description"
-        android:layout_below="@id/textView"
-        android:layout_centerHorizontal="true"
-        />
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/textsize"
+                android:id="@+id/helptv"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="HELP"
+                android:textColor="#FFFFFFFF"
+                android:gravity="center"
+                android:background="#00878787"
+                android:textIsSelectable="false" />
+        </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="More serious! An help is displayed. Time attack mode, reach the number 64 before the end of the timeout!"
-        android:textSize="13sp"
-        android:id="@+id/normal_mode_description"
-        android:gravity="center"
-        android:layout_below="@id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"/>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You are Mr Binary! No help displayed! Time attack mode! Enter the maximum numbers you can before the end of the timeout!"
-        android:textSize="13sp"
-        android:id="@+id/god_mode_description"
-        android:layout_below="@id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
-        android:gravity="center"/>
+
+
 
 </RelativeLayout>

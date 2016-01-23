@@ -6,27 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
-
-import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
+import android.os.CountDownTimer;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.View;
-import android.os.CountDownTimer;
 import android.widget.Toast;
-
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -92,7 +83,7 @@ public class Player_1 extends Activity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.player_1_layout);
         dialog=new Dialog(context);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_gameover);
         dialog.setCanceledOnTouchOutside(false);
         //Game mode parametrization
