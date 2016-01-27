@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/topribbon"
+            android:background="#FF575556"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:text="Counter"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/countertxt"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:background="#00A1BECE"
+                    android:textColor="#FF000000" />
+                <TextView
+                    android:id="@+id/counter"
+                    android:text="Counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center"
+                    android:minWidth="50dp"
+
+                    android:layout_centerInParent="true"
+                    android:background="#00A1BECE"
+                    android:textColor="#FFFFFFFF" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:background="@drawable/background_xhdpi"
+            tools:context="com.myapplication.myapplication.Player_1">
+
+            <View
+                android:id="@+id/fakeView"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ln"
+                android:background="#FFA1BECE"
+                android:layout_below="@id/fakeView">
+
+                <TextView
+                    android:id="@+id/int_to_disp"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="11"
+                    android:textColor="#FF000000"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+            </FrameLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/fakeView"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/small_binabot"
+                android:src="@drawable/small_binabot" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/marginsmall"
+                android:background="#FFA1BECE"
+                android:id="@+id/fl"
+                android:layout_below="@id/ln">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsizesmall"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="@string/tutotxt2"
+                    android:textColor="#FF000000"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#FF575757"
+                android:onClick="step3"
+                android:layout_below="@id/fl">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/tutotxt4"
+                    android:textSize="@dimen/textsizesmall"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="NEXT"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+            </FrameLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

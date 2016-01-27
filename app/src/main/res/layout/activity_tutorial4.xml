@@ -1,0 +1,108 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/topribbon"
+            android:background="#FF575556"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:text="Counter"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/countertxt"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:background="#00A1BECE"
+                    android:textColor="#FF000000" />
+                <TextView
+                    android:id="@+id/counter"
+                    android:text="Counter value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center"
+                    android:minWidth="50dp"
+
+                    android:layout_centerInParent="true"
+                    android:background="#00A1BECE"
+                    android:textColor="#FFFFFFFF" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:background="@drawable/background_xhdpi"
+            tools:context="com.myapplication.myapplication.Player_1">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/output"
+                android:id="@+id/fl"
+                android:layout_margin="@dimen/marginsmall"
+                android:background="#FFA1BECE">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="@string/tutotxt4"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:onClick="startGame"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/fl"
+                android:background="#FF575757">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/tutotxt8"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="START GAME !"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

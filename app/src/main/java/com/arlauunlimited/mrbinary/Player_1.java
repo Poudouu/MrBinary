@@ -651,6 +651,9 @@ public class Player_1 extends Activity {
     }
 
     public void back_to_main_activity(View view){
+        Intent intent = new Intent(Player_1.this, Main_menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
     }
 
@@ -662,13 +665,7 @@ public class Player_1 extends Activity {
         if (ShareDialog.canShow(ShareLinkContent.class))
         {
             Log.e("Test", "inside shareOnFacebook()");
-
-            //            ShareLinkContent shareLinkContent = new ShareLinkContent.Builder().setContentDescription(content).build();
-            ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                    .setContentTitle("New high score !")
-                    .setContentDescription(
-                            "score :" + integer_to_enter)
-                    .build();
+            ShareLinkContent linkContent = new ShareLinkContent.Builder().setContentTitle("New high score !").setContentDescription("score :" + integer_to_enter).build();
             if(linkContent!=null) {
                 shareDialog.show(linkContent);
             }

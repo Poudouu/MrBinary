@@ -40,18 +40,15 @@ public class Main_menu extends Activity {
         tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
         TextView textView= (TextView) findViewById(R.id.playtv);
         textView.setTypeface(tf);
-        textView = (TextView) findViewById(R.id.helptv);
-        textView.setTypeface(tf);
         textView = (TextView) findViewById(R.id.tutotv);
         textView.setTypeface(tf);
 
     }
 
     public void Switch_to_mode_1(View view) {
-        Intent intent = new Intent(this, Player_1.class);
-        String str="noob";
-        intent.putExtra("string", str);
+        Intent intent = new Intent(this, Tutorial.class);
         startActivity(intent);
+        finish();
     }
 
     public void Switch_to_mode_2(View view) {
@@ -59,13 +56,16 @@ public class Main_menu extends Activity {
         String str="normal";
         intent.putExtra("string", str);
         startActivity(intent);
-    }
+        finish();
+
+}
 
     public void Switch_to_mode_3(View view) {
         Intent intent = new Intent(this, Player_1.class);
         String str="god";
         intent.putExtra("string", str);
         startActivity(intent);
+        finish();
     }
 
     public void view_binary_explanation(View view) {

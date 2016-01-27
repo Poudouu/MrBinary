@@ -73,29 +73,6 @@
                 android:background="#00878787"
                 android:textIsSelectable="false" />
         </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foregroundGravity="bottom"
-            android:minWidth="@dimen/width_bub"
-            android:id="@+id/help"
-            android:layout_marginBottom="20dp"
-            android:onClick="Switch_to_mode_3"
-            android:background="#FFA1BECE">
-
-            <TextView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:textSize="@dimen/textsize"
-                android:id="@+id/helptv"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/activity_vertical_margin"
-                android:text="HELP"
-                android:textColor="#FFFFFFFF"
-                android:gravity="center"
-                android:background="#00878787"
-                android:textIsSelectable="false" />
-        </FrameLayout>
 
     </LinearLayout>
 

@@ -22,5 +22,14 @@
     <string name="facebook_app_id">1623376301276025</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner2_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="title_activity_tutorial">Tutorial</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="tutotxt1">Hello ! Welcome to Mr Binary. Ready to get some binary fun ?</string>
+    <string name="tutotxt2">The Binabot will give you increasing numbers that you should type in binary</string>
+    <string name="tutotxt3">Type the sequence using the buttons "1" and "0". Example, 13 is 1101</string>
+    <string name="tutotxt4">Do not forget the counter ! It starts at 30 seconds, and increases by 2 seconds when a correct value is entered</string>
+    <string name="helptxt1">The binary allows to write numbers in powers of 2. It uses two symbols : "1" and "0". Example: </string>
 </resources>
 

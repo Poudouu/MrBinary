@@ -1,0 +1,312 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/topribbon"
+            android:background="#FF575556"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:text="Counter"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/countertxt"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:background="#00A1BECE"
+                    android:textColor="#FF000000" />
+                <TextView
+                    android:id="@+id/counter"
+                    android:text="Counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center"
+                    android:minWidth="50dp"
+
+                    android:layout_centerInParent="true"
+                    android:background="#00A1BECE"
+                    android:textColor="#FFFFFFFF" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:background="@drawable/background_xhdpi"
+            tools:context="com.myapplication.myapplication.Player_1">
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/banner2_ad_unit_id">
+            </com.google.android.gms.ads.AdView>
+
+            <View
+                android:id="@+id/fakeView"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_toLeftOf="@id/fakeView"
+                android:layout_marginRight="20dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/button3"
+                android:clickable="true"
+                android:layout_above="@id/adView2"
+                android:layout_marginBottom="20dp"
+                android:background="#FF4E7886">
+
+                <TextView
+                    android:id="@+id/zero"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="1"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+
+            </FrameLayout>
+
+
+
+            <ImageView
+                android:layout_width="@dimen/height_bub"
+                android:layout_height="@dimen/width_bub"
+                />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_toRightOf="@id/fakeView"
+                android:layout_marginLeft="20dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/button4"
+                android:layout_above="@id/adView2"
+                android:layout_marginBottom="20dp"
+                android:background="#FF4E7886">
+
+                <TextView
+                    android:id="@+id/ouane"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="0"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/blackline"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/line"
+                android:layout_marginBottom="10dp"
+                android:layout_above="@id/button4"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="80dp"
+                android:id="@+id/output"
+                android:text="@string/entered_binary_seq"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/textsize"
+                android:textColor="#FF000000"
+                android:layout_above="@id/line"
+                android:background="#00A1BECE"
+                android:layout_centerHorizontal="true"
+                android:autoText="false" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/help_display"
+                android:text="help_display"
+                android:visibility="invisible"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"/>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/width_bub"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ln"
+                android:layout_marginBottom="20dp"
+                android:background="#FFA1BECE"
+                android:layout_above="@id/output">
+
+                <TextView
+                    android:id="@+id/int_to_disp"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="11"
+                    android:textColor="#FF000000"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Actual_game_status"
+                android:visibility="invisible"
+                android:textSize="25sp"
+                android:text="@string/game_status"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/best_score"
+                android:id="@+id/best_score"
+                android:textSize="@dimen/textsizecounter"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:textColor="#FF000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_score"
+                android:textColor="#FF000000"
+                android:id="@+id/last_score"
+                android:textSize="@dimen/textsizecounter"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/best_score"
+                android:layout_above="@id/ln"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/small_binabot"
+                android:src="@drawable/small_binabot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/game_mode"
+                android:layout_alignLeft="@id/button4"
+                android:visibility="invisible"
+                android:layout_alignStart="@+id/button4" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#AA000000">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="#FFA1BECE">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mr_binary_icongame"/>
+            <TextView
+                android:id="@+id/tutotxt1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/textsize"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="@string/tutotxt1"
+                android:textColor="#FF000000"
+                android:gravity="center"
+                android:background="#00FFFFFF"
+                android:textIsSelectable="false" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:minWidth="@dimen/width_bub"
+                android:onClick="step2"
+                android:layout_marginBottom="20dp"
+                android:background="#FF575757">
+
+                <TextView
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/tutotxt2"
+                    android:textSize="@dimen/textsize"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="YES !"
+                    android:textColor="#FFFFFFFF"
+                    android:gravity="center"
+                    android:background="#00FFFFFF"
+                    android:textIsSelectable="false" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

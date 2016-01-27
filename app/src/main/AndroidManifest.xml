@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arlauunlimited.mrbinary" >
 
-    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,25 +15,23 @@
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Player_1"
             android:label="@string/title_activity_display_message"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arlauunlimited.mrbinary.MainActivity" />
         </activity>
-
         <activity
             android:name=".Player_2"
             android:label="@string/title_activity_2_display_message"
@@ -39,24 +40,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.arlauunlimited.mrbinary.MainActivity" />
         </activity>
-
-        <activity android:name=".Main_menu"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".Main_menu"
             android:parentActivityName=".MainActivity"
-            ></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1234"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1234"
             android:exported="true" />
 
-
+        <activity
+            android:name=".Tutorial"
+            android:label="@string/title_activity_tutorial" >
+        </activity>
     </application>
 
 </manifest>
