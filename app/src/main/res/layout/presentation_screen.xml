@@ -30,6 +30,4 @@
         android:id="@+id/start_game"
         android:layout_centerHorizontal="true"
 />
-
-
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -15,13 +16,22 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.ShareOpenGraphAction;
+import com.facebook.share.model.ShareOpenGraphContent;
+import com.facebook.share.model.ShareOpenGraphObject;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -47,6 +57,8 @@ public class Player_1 extends Activity {
     CountDownTimer Count;
     // Counter value used to create the counter
     long counter_value_global;
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
     // Flag used to start a new counter at every good input of the player
 
     OutputStreamWriter osw = null;
@@ -82,7 +94,10 @@ public class Player_1 extends Activity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.player_1_layout);
-        dialog=new Dialog(context);
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            callbackManager = CallbackManager.Factory.create();
+            shareDialog = new ShareDialog(this);
+            dialog=new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_gameover);
         dialog.setCanceledOnTouchOutside(false);
@@ -180,6 +195,12 @@ public class Player_1 extends Activity {
         TextView count=(TextView) findViewById(R.id.counter);
         count.setTypeface(tf);
 
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     //Function used to create the counter and allow to call it itself when the player enter a good answer
@@ -466,6 +487,7 @@ public class Player_1 extends Activity {
                         tv.setTypeface(tf);
                         tv=(TextView) dialog.findViewById(R.id.Score);
                         tv.setTypeface(tf);
+                        integer_to_enter=integer_to_enter-1;
                         tv.setText("" + integer_to_enter);
                         tv=(TextView) dialog.findViewById(R.id.restart);
                         tv.setTypeface(tf);
@@ -658,26 +680,22 @@ public class Player_1 extends Activity {
     }
 
     public void shareOnFacebook(View view){
-        Intent mIntent = getIntent();
-        ShareDialog shareDialog;
-        int integer_to_enter = mIntent.getIntExtra("score", 0);
-        shareDialog = new ShareDialog(this);
-        if (ShareDialog.canShow(ShareLinkContent.class))
-        {
-            Log.e("Test", "inside shareOnFacebook()");
-            ShareLinkContent linkContent = new ShareLinkContent.Builder().setContentTitle("New high score !").setContentDescription("score :" + integer_to_enter).build();
-            if(linkContent!=null) {
-                shareDialog.show(linkContent);
-            }
-            else {
-                Toast.makeText(this, "NULL", Toast.LENGTH_LONG).show();
-            }
-        }
-        else
-        {
-            Toast.makeText(this, "NOT CALLED", Toast.LENGTH_SHORT).show();
+        LinearLayout ll = (LinearLayout) view.getParent();
+        TextView tv = (TextView) ll.findViewById(R.id.Score);
+        String score = tv.getText().toString();
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("New Highscore !")
+                    .setContentDescription(
+                            "My new Highscore is:"+score)
+                    .setContentUrl(Uri.parse("http://postimg.org/image/3ybilbzz3/"))
+                    .build();
+            shareDialog.show(linkContent);
         }
     }
+
+
+
 
 
     @Override

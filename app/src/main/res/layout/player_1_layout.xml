@@ -47,8 +47,7 @@
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     android:background="@drawable/background_xhdpi"
-    tools:context="com.myapplication.myapplication.Player_1"
-        android:id="@+id/">
+    tools:context="com.myapplication.myapplication.Player_1">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView2"

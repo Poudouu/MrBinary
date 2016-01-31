@@ -19,19 +19,10 @@ public class Tutorial extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().addFlags(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.help_binary);
-        tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
-        TextView tv = (TextView) findViewById(R.id.okbut);
+        setContentView(R.layout.activity_tutorial);
+        TextView tv = (TextView) findViewById(R.id.tutotxt2);
         tv.setTypeface(tf);
-        tv = (TextView) findViewById(R.id.helptxt1);
-        tv.setTypeface(tf);
-        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
-        fl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startTuto(v);
-            }
-        });
+
     }
 
     @Override
@@ -109,8 +100,18 @@ public class Tutorial extends Activity {
         finish();
     }
     public void startTuto(View view){
-        setContentView(R.layout.activity_tutorial);
-        TextView tv = (TextView) findViewById(R.id.tutotxt2);
+        setContentView(R.layout.help_binary);
+        tf = Typeface.createFromAsset(getAssets(),"fonts/binafont.ttf");
+        TextView tv = (TextView) findViewById(R.id.okbut);
         tv.setTypeface(tf);
+        tv = (TextView) findViewById(R.id.helptxt1);
+        tv.setTypeface(tf);
+        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step2(v);
+            }
+        });
     }
 }

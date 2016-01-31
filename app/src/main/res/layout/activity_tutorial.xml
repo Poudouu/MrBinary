@@ -284,7 +284,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:minWidth="@dimen/width_bub"
-                android:onClick="step2"
+                android:onClick="startTuto"
                 android:layout_marginBottom="20dp"
                 android:background="#FF575757">
 
