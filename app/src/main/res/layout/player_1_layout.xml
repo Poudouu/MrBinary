@@ -47,7 +47,8 @@
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     android:background="@drawable/background_xhdpi"
-    tools:context="com.myapplication.myapplication.Player_1">
+    tools:context="com.myapplication.myapplication.Player_1"
+        android:id="@+id/">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView2"
@@ -227,8 +228,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/best_score"
         android:layout_above="@id/ln"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/marginsmall"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_centerHorizontal="true"
         android:id="@+id/small_binabot"
         android:src="@drawable/small_binabot" />

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class Tutorial extends Activity {
@@ -24,6 +25,13 @@ public class Tutorial extends Activity {
         tv.setTypeface(tf);
         tv = (TextView) findViewById(R.id.helptxt1);
         tv.setTypeface(tf);
+        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTuto(v);
+            }
+        });
     }
 
     @Override
@@ -52,6 +60,13 @@ public class Tutorial extends Activity {
         tv.setTypeface(tf);
         tv = (TextView) findViewById(R.id.tutotxt4);
         tv.setTypeface(tf);
+        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step3(v);
+            }
+        });
     }
     public void step3 (View view){
         setContentView(R.layout.activity_tutorial3);
@@ -65,11 +80,25 @@ public class Tutorial extends Activity {
         tv.setTypeface(tf);
         tv = (TextView) findViewById(R.id.tutotxt6);
         tv.setTypeface(tf);
+        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                step4(v);
+            }
+        });
     }
     public void step4 (View view){
         setContentView(R.layout.activity_tutorial4);
         TextView tv = (TextView) findViewById(R.id.tutotxt8);
         tv.setTypeface(tf);
+        FrameLayout fl=(FrameLayout) findViewById(R.id.fl2);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame(v);
+            }
+        });
 
     }
     public void startGame (View view) {

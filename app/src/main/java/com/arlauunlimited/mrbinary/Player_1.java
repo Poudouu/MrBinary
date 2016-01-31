@@ -486,7 +486,7 @@ public class Player_1 extends Activity {
                             }
                         });
 
-                        ImageButton ib = (ImageButton) dialog.findViewById(R.id.share);
+                        ImageView ib = (ImageView) dialog.findViewById(R.id.share);
                         ib.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

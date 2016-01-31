@@ -140,6 +140,7 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/fl2"
                 android:layout_centerHorizontal="true"
                 android:background="#FF575757"
                 android:onClick="step4"

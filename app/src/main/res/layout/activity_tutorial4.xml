@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="@dimen/width_bub"
-                android:onClick="startGame"
+                android:id="@+id/fl2"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/fl"
                 android:background="#FF575757">
