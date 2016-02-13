@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="normal_mode">Normal</string>
+    <string name="god_mode">Professionnel</string>
+    <string name="noob_mode">Débutant</string>
+    <string name="active_mode_normal">Difficulté: Normal.</string>
+    <string name="active_mode_god">Difficulté: Professionnel.</string>
+    <string name="active_mode_noob">Difficulté: Débutant.</string>
+    <string name="play_now">Jouer !</string>
+    <string name="you_fail_try_again">Perdu ! Recommence!</string>
+    <string name="time_over">Temps écoulé !</string>
+    <string name="playing">Joue...</string>
+    <string name="you_win">Bonne réponse: +2s</string>
+    <string name="timeout_try_again">Temps écoulé... recommence!</string>
+    <string name="best_score_file">game_data.dat</string>
+    <string name="ready_for_next_difficulty_level">Prêt pour le niveau suppérieur...</string>
+    <string name="noob_mode_good_answer">Bien... :-)</string>
+    <string name="best_score">Meilleur score:</string>
+    <string name="last_score">Dernier score:</string>
+    <string name="new_highscore">Nouveau meilleur score!</string>
+    <string name="my_new_highscore">Mon score est: </string>
+
+
+    <string name="app_name">Mr Binary</string>
+    <string name="edit_message">Choisissez votre niveau de difficulté</string>
+    <string name="Noob_selection">Débutant</string>
+    <string name="Normal_selection">Normal</string>
+    <string name="God_selection">Professionnel</string>
+    <string name="entered_binary_seq">Séquence binaire entrée</string>
+    <string name="game_status">Status jeu</string>
+    <string name="Int_to_enter">Entier à rentrer</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_search">Chercher</string>
+    <string name="title_activity_display_message">Jeu</string>
+    <string name="title_activity_2_display_message">Qu est ce que le binaire?</string>
+    <string name="title_activity_3_display_message">Professionnel</string>
+    <string name="value_one">1</string>
+    <string name="value_zero">0</string>
+    <string name="temp_value"></string>
+    <string name="one">1</string>
+    <string name="zero">0</string>
+    <string name="tutorial">TUTORIAL</string>
+    <string name="play">JOUER</string>
+    <string name="yes">OUI !</string>
+    <string name="new_text">Nouveau texte</string>
+    <string name="counter">Compteur</string>
+    <string name="next">SUIVANT</string>
+    <string name="binary_number">Nombre binaire</string>
+    <string name="counter_value">Valeur du compteur</string>
+    <string name="start_game">JOUER !</string>
+    <string name="what_is_the_binary">Qu est ce que le binaire ?</string>
+    <string name="ok">OK !</string>
+    <string name="you_lost">Perdu !</string>
+    <string name="your_score_is">Votre score est: </string>
+    <string name="your_score">Votre score</string>
+    <string name="restart">  Redémarrer  </string>
+    <string name="main_menu">Menu principal</string>
+
+    <string name="facebook_app_id">188375078185998</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2487168799143866/5665525438</string>
+    <string name="banner2_ad_unit_id">ca-app-pub-2487168799143866/9453883438</string>
+
+    <string name="title_activity_tutorial">Tutorial</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="tutotxt1">Bonjour! Bienvenue sur Mr Binary. Etes-vous prêt pour un peu de fun binaire ? </string>
+    <string name="tutotxt2">Le Binabot va vous demander de rentrer en binaire des entiers s incrémentant.</string>
+    <string name="tutotxt3">Le binaire permet de coder des entiers en puissances de 2. Entrez le nombre demandé en binaire en utilisant les boutons "1" et "0" à votre disposition. Par exemple, pour le chiffre 13, il faut rentrer 1101 (1x8+1x4+0x2+1x1=13).</string>
+    <string name="tutotxt4">N oubliez pas le compteur! Il démarre à 30s et s incrémente de 2s quand vous entrez correctement un entier.</string>
+    <string name="helptxt1">Le binaire permet de coder des entiers en puissances de 2. Il utilise 2 symbôles: "1" et "0". Par exemple:</string>
+
+</resources>
+

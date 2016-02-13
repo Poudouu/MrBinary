@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -27,6 +29,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphAction;
@@ -37,13 +40,16 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nineoldandroids.animation.Animator;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -70,33 +76,31 @@ public class Player_1 extends Activity {
     Context context=Player_1.this;
     Dialog dialog = null;
     Typeface tf = null;
-    String play_now="Play now!";
-    String you_fail_try_again="You fail! Try again!";
-    String time_over="Time over!";
-    String playing="Playing...";
-    String you_win="Good answer: +2s";
-    String timeout_try_again="Timeout... try again!";
-    String best_score_file ="game_data.dat";
-    String ready_for_next_difficulty_level="Ready for next difficulty level...";
 
-    //Help strings for noob and normal modes
-    String no_help="------------------";
-    String help_1="help: 1";
-    String help_2="help: 2-1";
-    String help_3="help: 4-2-1";
-    String help_4="help: 8-4-2-1";
-    String help_5="help: 16-8-4-2-1";
-    String help_6="help: 32-16-8-4-2-1";
-    String help_7="help: 64-32-16-8-4-2-1";
-    String help_8="help: 128-64-32-16-8-4-2-1";
+    String you_fail_try_again="";
+    String time_over="";
+    String playing="";
+    String you_win="";
+    String timeout_try_again="";
+    String best_score_file ="";
+    String ready_for_next_difficulty_level="";
+    String play_now="";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.player_1_layout);
-            FacebookSdk.sdkInitialize(getApplicationContext());
-            callbackManager = CallbackManager.Factory.create();
-            shareDialog = new ShareDialog(this);
+
+
+            you_fail_try_again=getString(R.string.you_fail_try_again);
+            time_over=getString(R.string.time_over);
+            playing=getString(R.string.playing);
+            you_win=getString(R.string.you_win);
+            timeout_try_again=getString(R.string.timeout_try_again);
+            best_score_file =getString(R.string.best_score_file);
+            ready_for_next_difficulty_level=getString(R.string.ready_for_next_difficulty_level);
+            play_now=getString(R.string.play_now);
+
             dialog=new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_gameover);
@@ -106,23 +110,23 @@ public class Player_1 extends Activity {
         TextView game_mode = (TextView) findViewById(R.id.game_mode);
         game_mode.setTypeface(tf);
         String str = (String) getIntent().getSerializableExtra("string");
-        if ((str).equals("noob")) {
+        if ((str).equals(getString(R.string.noob_mode))) {
             noob_mode = true;
             normal_mode = false;
             god_mode = false;
-            game_mode.setText("Mode: Noob.");
+            game_mode.setText(getString(R.string.active_mode_noob));
         }
-        if ((str).equals("normal")) {
+        if ((str).equals(getString(R.string.normal_mode))) {
             noob_mode = false;
             normal_mode = true;
             god_mode = false;
-            game_mode.setText("Mode: Normal.");
+            game_mode.setText(getString(R.string.active_mode_normal));
         }
-        if ((str).equals("god")) {
+        if ((str).equals(getString(R.string.god_mode))) {
             noob_mode = false;
             normal_mode = false;
             god_mode = true;
-            game_mode.setText("Mode: God.");
+            game_mode.setText(getString(R.string.active_mode_god));
         }
 
         // Initialize the entered binary string to ""
@@ -135,16 +139,6 @@ public class Player_1 extends Activity {
         TextView int_to_disp = (TextView) findViewById(R.id.int_to_disp);
         int_to_disp.setTypeface(tf);
         int_to_disp.setText(integer_to_display);
-
-        // Display the help depending of the game mode
-        TextView help = (TextView) findViewById(R.id.help_display);
-        help.setTypeface(tf);
-        if (noob_mode || normal_mode) {
-            help.setText(help_1);
-        }
-        if (god_mode){
-            help.setText(no_help);
-        }
 
         // Initialize the game status
         String game_status_temp = play_now;
@@ -160,7 +154,7 @@ public class Player_1 extends Activity {
         countertxt.setTypeface(tf);
         if (noob_mode) {
             textic.setText("");
-            you_win="Good... :-)";
+            you_win=getString(R.string.noob_mode_good_answer);
         }
 
         try {
@@ -234,20 +228,79 @@ public class Player_1 extends Activity {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+
+                displayPopupGameOver();
+
                 integer_to_enter=1;
+                final RelativeLayout rl= (RelativeLayout) act_game_stat.getParent();
+                final ImageView bot = (ImageView) rl.findViewById(R.id.small_binabot);
+                bot.setImageResource(R.drawable.small_binabot);
                 String integer_to_display = ""+integer_to_enter;
                 TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                 int_to_disp.setText(integer_to_display);
-                if (noob_mode || normal_mode) {
-                    TextView help = (TextView) findViewById(R.id.help_display);
-                    help.setText(help_1);
-                }
 
                 TextView bin_seq_entered = (TextView)findViewById(R.id.output);
                 bin_seq_entered.setText("");
 
             }
         };
+    }
+
+    public void displayPopupGameOver(){
+        TextView tv = (TextView) dialog.findViewById(R.id.youlost);
+        tv.setTypeface(tf);
+        tv=(TextView) dialog.findViewById(R.id.textView6);
+        tv.setTypeface(tf);
+        tv=(TextView) dialog.findViewById(R.id.Score);
+        tv.setTypeface(tf);
+        integer_to_enter=integer_to_enter-1;
+        tv.setText("" + integer_to_enter);
+        tv=(TextView) dialog.findViewById(R.id.restart);
+        tv.setTypeface(tf);
+        tv=(TextView) dialog.findViewById(R.id.exit);
+        tv.setTypeface(tf);
+        FrameLayout fl = (FrameLayout)dialog.findViewById(R.id.leave_activity);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back_to_main_activity(v);
+            }
+        });
+        fl = (FrameLayout) dialog.findViewById(R.id.restart_activity);
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restart_activity(v);
+            }
+        });
+
+        ImageView ib = (ImageView) dialog.findViewById(R.id.share);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //shareOnFacebook(v);
+                LinearLayout ll = (LinearLayout) v.getParent();
+                TextView tv = (TextView) ll.findViewById(R.id.Score);
+                String score = tv.getText().toString();
+
+                FacebookSdk.sdkInitialize(getApplicationContext());
+                callbackManager = CallbackManager.Factory.create();
+                shareDialog = new ShareDialog(Player_1.this);
+
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentTitle(getString(R.string.new_highscore))
+                            .setContentDescription(getString(R.string.my_new_highscore) + score)
+                            .setContentUrl((Uri.parse("https://www.facebook.com/MBinaryTheGame/?skip_nax_wizard=true")))
+                            .setImageUrl((Uri.parse("https://scontent-mrs1-1.xx.fbcdn.net/hphotos-xtp1/t39.2081-0/p128x128/12624136_188434544846718_1518465147_n.png")))
+                            .build();
+                    shareDialog.show(linkContent);
+
+
+                }
+            }
+        });
+        dialog.show();
     }
 
     public void check_and_update_high_score(int potential_high_score_from_game) throws FileNotFoundException {
@@ -261,10 +314,10 @@ public class Player_1 extends Activity {
         String best_score_read_2="";
         String best_score_read_3="";
 
-        // Read the actual high score stored in the file game_data.dat stored in the app directory on the device.
+        // Read the actual high score stored in the file best_score_file stored in the app directory on the device.
         try {
 
-            FileInputStream fileInputStream=openFileInput("game_data.dat");
+            FileInputStream fileInputStream=openFileInput(best_score_file);
             isr= new InputStreamReader(fileInputStream);
             isr.read(inputBuffer);
 
@@ -390,9 +443,9 @@ public class Player_1 extends Activity {
 
         best_to_write_string=best_score_to_write+"";
 
-        // Wright the high score stored in the file game_data.dat stored in the app directory on the device.
+        // Wright the high score stored in the file best_score_file stored in the app directory on the device.
         try {
-            FileOutputStream fileOutputStream = openFileOutput("game_data.dat",MODE_PRIVATE);
+            FileOutputStream fileOutputStream = openFileOutput(best_score_file,MODE_PRIVATE);
             osw = new OutputStreamWriter(fileOutputStream);
             osw.write(best_to_write_string);
             osw.flush();
@@ -406,12 +459,12 @@ public class Player_1 extends Activity {
 
         //Display best score
         TextView best_score_display = (TextView)findViewById(R.id.best_score);
-        String best_to_display="Best score:"+best_score_to_write;
+        String best_to_display=getString(R.string.best_score)+best_score_to_write;
         best_score_display.setText(best_to_display);
 
         //Display score of last game
         TextView last_score_to_display = (TextView)findViewById(R.id.last_score);
-        String last_score_to_display_string="Last score:"+potential_high_score;
+        String last_score_to_display_string=getString(R.string.last_score)+potential_high_score;
         last_score_to_display.setText(last_score_to_display_string);
     }
 
@@ -481,50 +534,13 @@ public class Player_1 extends Activity {
                             e.printStackTrace();
                         }
 
-                        TextView tv = (TextView) dialog.findViewById(R.id.youlost);
-                        tv.setTypeface(tf);
-                        tv=(TextView) dialog.findViewById(R.id.textView6);
-                        tv.setTypeface(tf);
-                        tv=(TextView) dialog.findViewById(R.id.Score);
-                        tv.setTypeface(tf);
-                        integer_to_enter=integer_to_enter-1;
-                        tv.setText("" + integer_to_enter);
-                        tv=(TextView) dialog.findViewById(R.id.restart);
-                        tv.setTypeface(tf);
-                        tv=(TextView) dialog.findViewById(R.id.exit);
-                        tv.setTypeface(tf);
-                        FrameLayout fl = (FrameLayout)dialog.findViewById(R.id.leave_activity);
-                        fl.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                back_to_main_activity(v);
-                            }
-                        });
-                        fl = (FrameLayout) dialog.findViewById(R.id.restart_activity);
-                        fl.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                restart_activity(v);
-                            }
-                        });
+                        displayPopupGameOver();
 
-                        ImageView ib = (ImageView) dialog.findViewById(R.id.share);
-                        ib.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                shareOnFacebook(v);
-                            }
-                        });
-                        dialog.show();
                         integer_to_enter=1;
                         bot.setImageResource(R.drawable.small_binabot);
                         String integer_to_display = ""+integer_to_enter;
                         TextView int_to_disp = (TextView)findViewById(R.id.int_to_disp);
                         int_to_disp.setText(integer_to_display);
-                        if(noob_mode || normal_mode) {
-                            TextView help = (TextView) findViewById(R.id.help_display);
-                            help.setText(help_1);
-                        }
                     }
 
                     @Override
@@ -549,35 +565,7 @@ public class Player_1 extends Activity {
         // Find the length of the int_bin_to_compare string
         int length_test_current_int = length_test_current.length();
         //Update help string
-        if(normal_mode || noob_mode){
-            TextView help = (TextView) findViewById(R.id.help_display);
-            switch(length_test_current_int){
-                case 1:
-                    help.setText(help_1);
-                    break;
-                case 2:
-                    help.setText(help_2);
-                    break;
-                case 3:
-                    help.setText(help_3);
-                    break;
-                case 4:
-                    help.setText(help_4);
-                    break;
-                case 5:
-                    help.setText(help_5);
-                    break;
-                case 6:
-                    help.setText(help_6);
-                    break;
-                case 7:
-                    help.setText(help_7);
-                    break;
-                case 8:
-                    help.setText(help_8);
-                    break;
-            }
-        }
+
         if((noob_mode || normal_mode) && (integer_to_enter==max_number_low_difficulty)){
             //Stop the timer if the player entered a wrong binary sequence (reset game)
             if(!noob_mode) {
@@ -678,25 +666,6 @@ public class Player_1 extends Activity {
         startActivity(intent);
         finish();
     }
-
-    public void shareOnFacebook(View view){
-        LinearLayout ll = (LinearLayout) view.getParent();
-        TextView tv = (TextView) ll.findViewById(R.id.Score);
-        String score = tv.getText().toString();
-        if (ShareDialog.canShow(ShareLinkContent.class)) {
-            ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                    .setContentTitle("New Highscore !")
-                    .setContentDescription(
-                            "My new Highscore is:"+score)
-                    .setContentUrl(Uri.parse("http://postimg.org/image/3ybilbzz3/"))
-                    .build();
-            shareDialog.show(linkContent);
-        }
-    }
-
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

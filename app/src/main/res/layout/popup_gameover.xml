@@ -12,7 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textSize="@dimen/textsize"
-        android:text="You lost !"
+        android:text="@string/you_lost"
         android:id="@+id/youlost"
         android:textColor="#ffffff" />
 
@@ -24,7 +24,7 @@
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:textSize="@dimen/textsize"
-        android:text="Your score is "
+        android:text="@string/your_score_is"
         android:id="@+id/textView6"
         android:textColor="#FF000000" />
 
@@ -39,15 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textsize"
-            android:text="Yourscore"
+            android:text="@string/your_score"
             android:id="@+id/Score"
             android:textColor="#ffA1BECE"
             android:layout_gravity="center_vertical" />
 
         <ImageView
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:src="@drawable/fblogo1"
-            android:layout_width="50dp"
+            android:background="@drawable/blue_green_button_bg"
+            android:layout_width="60dp"
             android:layout_marginLeft="@dimen/marginsmall"
             android:id="@+id/share"
             android:onClick="shareOnFacebook" />
@@ -69,7 +70,7 @@
             android:id="@+id/restart_activity"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="#FFA1BECE">
+            android:background="@drawable/blue_light_button_bg">
 
             <TextView
                 android:id="@+id/restart"
@@ -78,7 +79,7 @@
                 android:textSize="@dimen/textsizecounter"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="  Restart  "
+                android:text="@string/restart"
                 android:textColor="#FFFFFFFF"
                 android:gravity="center"
                 android:background="#00FFFFFF"
@@ -93,7 +94,7 @@
             android:id="@+id/leave_activity"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="20dp"
-            android:background="#FFA1BECE">
+            android:background="@drawable/blue_light_button_bg">
 
             <TextView
                 android:id="@+id/exit"
@@ -101,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="@dimen/textsizecounter"
                 android:layout_margin="10dp"
-                android:text="Main menu"
+                android:text="@string/main_menu"
                 android:textColor="#FFFFFFFF"
                 android:gravity="center"
                 android:background="#00FFFFFF" />

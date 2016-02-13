@@ -35,7 +35,7 @@
             android:id="@+id/tutorial"
             android:onClick="Switch_to_mode_1"
             android:layout_marginBottom="20dp"
-            android:background="#FF878787">
+            android:background="@drawable/grey_light_button_bg">
 
             <TextView
                 android:layout_height="match_parent"
@@ -44,7 +44,7 @@
                 android:id="@+id/tutotv"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/activity_vertical_margin"
-                android:text="TUTORIAL"
+                android:text="@string/tutorial"
                 android:textColor="#FFFFFFFF"
                 android:gravity="center"
                 android:background="#00FFFFFF"
@@ -58,7 +58,7 @@
             android:id="@+id/play"
             android:layout_marginBottom="20dp"
             android:onClick="Switch_to_mode_3"
-            android:background="#FF575757">
+            android:background="@drawable/grey_dark_button_bg">
 
             <TextView
                 android:layout_height="match_parent"
@@ -67,7 +67,7 @@
                 android:id="@+id/playtv"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/activity_vertical_margin"
-                android:text="PLAY"
+                android:text="@string/play"
                 android:textColor="#FFFFFFFF"
                 android:gravity="center"
                 android:background="#00878787"

@@ -53,7 +53,7 @@ public class Main_menu extends Activity {
 
     public void Switch_to_mode_2(View view) {
         Intent intent = new Intent(this, Player_1.class);
-        String str="normal";
+        String str=getString(R.string.normal_mode);
         intent.putExtra("string", str);
         startActivity(intent);
         finish();
@@ -62,16 +62,12 @@ public class Main_menu extends Activity {
 
     public void Switch_to_mode_3(View view) {
         Intent intent = new Intent(this, Player_1.class);
-        String str="god";
+        String str=getString(R.string.god_mode);
         intent.putExtra("string", str);
         startActivity(intent);
         finish();
     }
 
-    public void view_binary_explanation(View view) {
-        Intent intent = new Intent(this, Player_2.class);
-        startActivity(intent);
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

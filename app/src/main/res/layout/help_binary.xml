@@ -20,7 +20,7 @@
             android:textSize="@dimen/textsize"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="What is the binary ?"
+            android:text="@string/what_is_the_binary"
             android:layout_marginBottom="@dimen/marginsmall"
             android:textColor="#FF000000"
             android:gravity="center"
@@ -62,7 +62,7 @@
             android:layout_gravity="center_horizontal"
             android:id="@+id/fl2"
             android:layout_marginBottom="20dp"
-            android:background="#FFA1BECE">
+            android:background="@drawable/blue_light_button_bg">
 
             <TextView
                 android:id="@+id/okbut"
@@ -71,7 +71,7 @@
                 android:textSize="@dimen/textsize"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="OK !"
+                android:text="@string/ok"
                 android:textColor="#FF000000"
                 android:gravity="center"
                 android:background="#00FFFFFF"

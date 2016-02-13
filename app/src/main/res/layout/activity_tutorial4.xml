@@ -22,7 +22,7 @@
                 android:orientation="vertical"
                 android:gravity="center">
                 <TextView
-                    android:text="Counter"
+                    android:text="@string/counter"
                     android:layout_width="wrap_content"
                     android:id="@+id/countertxt"
                     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:textColor="#FF000000" />
                 <TextView
                     android:id="@+id/counter"
-                    android:text="Counter value"
+                    android:text="@string/counter_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:id="@+id/fl2"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/fl"
-                android:background="#FF575757">
+                android:background="@drawable/grey_dark_button_bg">
 
                 <TextView
                     android:layout_height="fill_parent"
@@ -93,7 +93,7 @@
                     android:textSize="@dimen/textsize"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:text="START GAME !"
+                    android:text="@string/start_game"
                     android:textColor="#FFFFFFFF"
                     android:gravity="center"
                     android:background="#00FFFFFF"

@@ -22,7 +22,7 @@
                 android:orientation="vertical"
                 android:gravity="center">
                 <TextView
-                    android:text="Counter"
+                    android:text="@string/counter"
                     android:layout_width="wrap_content"
                     android:id="@+id/countertxt"
                     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:textColor="#FF000000" />
                 <TextView
                     android:id="@+id/counter"
-                    android:text="Counter"
+                    android:text="@string/counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/fl2"
-                android:background="#FF575757"
+                android:background="@drawable/grey_dark_button_bg"
                 android:onClick="step3"
                 android:layout_below="@id/fl">
 
@@ -132,7 +132,7 @@
                     android:textSize="@dimen/textsizesmall"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:text="NEXT"
+                    android:text="@string/next"
                     android:textColor="#FFFFFFFF"
                     android:gravity="center"
                     android:background="#00FFFFFF"

@@ -1,4 +1,26 @@
 <resources>
+
+    <string name="normal_mode">Normal</string>
+    <string name="god_mode">God</string>
+    <string name="noob_mode">Noob</string>
+    <string name="active_mode_normal">Mode: Normal.</string>
+    <string name="active_mode_god">Mode: God.</string>
+    <string name="active_mode_noob">Mode: Noob.</string>
+    <string name="play_now">Play now!</string>
+    <string name="you_fail_try_again">You fail! Try again!</string>
+    <string name="time_over">Time over!</string>
+    <string name="playing">Playing...</string>
+    <string name="you_win">Good answer: +2s</string>
+    <string name="timeout_try_again">Timeout... try again!</string>
+    <string name="best_score_file">game_data.dat</string>
+    <string name="ready_for_next_difficulty_level">Ready for next difficulty level...</string>
+    <string name="noob_mode_good_answer">Good... :-)</string>
+    <string name="best_score">Best score:</string>
+    <string name="last_score">Last score:</string>
+    <string name="new_highscore">New Highscore!</string>
+    <string name="my_new_highscore">My score is: </string>
+
+
     <string name="app_name">Mr Binary</string>
     <string name="edit_message">Choose player mode</string>
     <string name="Noob_selection">Noob</string>
@@ -17,18 +39,33 @@
     <string name="temp_value"></string>
     <string name="one">1</string>
     <string name="zero">0</string>
-    <string name="best_score">Best score</string>
-    <string name="last_score">Last score</string>
-    <string name="facebook_app_id">1623376301276025</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner2_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="title_activity_tutorial">Tutorial</string>
+    <string name="tutorial">TUTORIAL</string>
+    <string name="play">PLAY</string>
+    <string name="yes">YES !</string>
+    <string name="new_text">New Text</string>
+    <string name="counter">Counter</string>
+    <string name="next">NEXT</string>
+    <string name="binary_number">Binary number</string>
+    <string name="counter_value">Counter value</string>
+    <string name="start_game">START GAME !</string>
+    <string name="what_is_the_binary">What is the binary ?</string>
+    <string name="ok">OK !</string>
+    <string name="you_lost">You lost!</string>
+    <string name="your_score_is">Your score is:</string>
+    <string name="your_score">Your score</string>
+    <string name="restart">  Restart  </string>
+    <string name="main_menu">Main menu</string>
 
+    <string name="facebook_app_id">188375078185998</string>
+    <string name="banner_ad_unit_id">ca-app-pub-2487168799143866/5665525438</string>
+    <string name="banner2_ad_unit_id">ca-app-pub-2487168799143866/9453883438</string>
+
+    <string name="title_activity_tutorial">Tutorial</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="tutotxt1">Hello ! Welcome to Mr Binary. Ready to get some binary fun ?</string>
-    <string name="tutotxt2">The Binabot will give you increasing numbers that you should type in binary</string>
-    <string name="tutotxt3">Type the sequence using the buttons "1" and "0". Example, 13 is 1101</string>
+    <string name="tutotxt2">The Binabot will give you increasing numbers that you should type in binary.</string>
+    <string name="tutotxt3">The binary allows to write numbers in powers of 2. Type the sequence using the buttons "1" and "0". Example, for the number 13, you have to enter 1101 (1x8+1x4+0x2+1x1=13).</string>
     <string name="tutotxt4">Do not forget the counter ! It starts at 30 seconds, and increases by 2 seconds when a correct value is entered</string>
     <string name="helptxt1">The binary allows to write numbers in powers of 2. It uses two symbols : "1" and "0". Example: </string>
 </resources>

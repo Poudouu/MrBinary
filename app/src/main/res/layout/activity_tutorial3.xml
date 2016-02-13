@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:minWidth="80dp"
                 android:id="@+id/output"
-                android:text="Binary number"
+                android:text="@string/binary_number"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="@dimen/textsize"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fl2"
                 android:layout_centerHorizontal="true"
-                android:background="#FF575757"
+                android:background="@drawable/grey_dark_button_bg"
                 android:onClick="step4"
                 android:layout_above="@id/fl">
 
@@ -153,7 +153,7 @@
                 android:textSize="@dimen/textsizesmall"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="NEXT"
+                android:text="@string/next"
                 android:textColor="#FFFFFFFF"
                 android:gravity="center"
                 android:background="#00FFFFFF"

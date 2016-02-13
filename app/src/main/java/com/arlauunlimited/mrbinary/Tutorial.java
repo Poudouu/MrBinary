@@ -94,7 +94,7 @@ public class Tutorial extends Activity {
     }
     public void startGame (View view) {
         Intent intent = new Intent(this, Player_1.class);
-        String str = "god";
+        String str = getString(R.string.god_mode);
         intent.putExtra("string", str);
         startActivity(intent);
         finish();
